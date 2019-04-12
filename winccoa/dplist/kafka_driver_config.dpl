@@ -1,0 +1,127 @@
+# ascii dump of database
+
+# DpType
+TypeName
+_DriverCommon._DriverCommon	1#1
+	GQ	20#2
+	SQ	27#3
+	SM	20#4
+	EM	20#5
+	PM	23#6
+	PE	22#7
+	MS	23#8
+	DC	23#9
+	AD	1#10
+		HWMask	25#11
+		DPMatch	29#12
+	HW	1#13
+		HWMask	25#14
+		HWMatch	9#15
+	IGQ	25#16
+	DT	25#17
+	OV	23#18
+	AL	1#19
+		AckDps	29#20
+		AckData	9#21
+		AClasses	9#22
+CONFIG_KAFKA.CONFIG_KAFKA	1#1
+	ALM	1#2
+		ALM1	21#3
+	DRIVER_INFO	1#4
+		DRIVER_OVERLOADED	23#5
+		MANAGER_CONNECTED	23#6
+		MANAGER_NUMBER	21#7
+	DebouncingThreadInterval	21#8
+	DebugLvl	21#9
+	IN	1#10
+		ConsumerStatsDP	25#18
+		DriverName	25#12
+		DrvVersion	25#13
+		LastConfigurationTime	21#14
+		NoConsumerConfig	23#20
+		NoProducerConfig	23#21
+		ProducerAllBrokersDown	25#16
+		ProducerStatsDP	25#17
+	MaxPollRecords	21#22
+
+# Datapoint/DpId
+DpName	TypeName	ID
+_Driver14	_DriverCommon	7669700
+_Driver14_2	_DriverCommon	7669702
+CONFIG_KAFKA_14	CONFIG_KAFKA	7670665
+
+# Aliases/Comments
+AliasId	AliasName	CommentName
+CONFIG_KAFKA_14.ALM.ALM1	""	lt:1 LANG:10001 "CONFIG_KAFKA_14.DriverName$$$CONFIG_KAFKA_14.DRIVER_INFO.MANAGER_NUMBER$7$56$0@@"
+CONFIG_KAFKA_14.DRIVER_INFO.DRIVER_OVERLOADED	""	lt:1 LANG:10001 "Driver Overloaded@@"
+CONFIG_KAFKA_14.DRIVER_INFO.MANAGER_CONNECTED	""	lt:1 LANG:10001 "Manager Connected@@"
+CONFIG_KAFKA_14.DRIVER_INFO.MANAGER_NUMBER	""	lt:1 LANG:10001 "Manager Number@@"
+CONFIG_KAFKA_14.DebouncingThreadInterval	""	lt:1 LANG:10001 "Debouncing thread interval for stream out@@"
+CONFIG_KAFKA_14.DebugLvl	""	lt:1 LANG:10001 "Debug Level@@"
+CONFIG_KAFKA_14.IN.DriverName	""	lt:1 LANG:10001 "Driver name@@"
+CONFIG_KAFKA_14.IN.DrvVersion	""	lt:1 LANG:10001 "Version@@"
+CONFIG_KAFKA_14.IN.LastConfigurationTime	""	lt:1 LANG:10001 "Last configuration time@@"
+CONFIG_KAFKA_14.IN.ProducerAllBrokersDown	""	lt:1 LANG:10001 "Producer All Brokers Down@@"
+CONFIG_KAFKA_14.IN.ProducerStatsDP	""	lt:1 LANG:10001 "Producer Statisticss DP@@"
+CONFIG_KAFKA_14.IN.ConsumerStatsDP	""	lt:1 LANG:10001 "Consumer Statisticss DP@@"
+CONFIG_KAFKA_14.IN.NoConsumerConfig	""	lt:1 LANG:10001 "No consumer config@@"
+CONFIG_KAFKA_14.IN.NoProducerConfig	""	lt:1 LANG:10001 "No producer config@@"
+CONFIG_KAFKA_14.MaxPollRecords	""	lt:1 LANG:10001 "Max poll records@@"
+
+# DpValue
+Manager/User	ElementName	TypeName	_original.._value	_original.._status64	_original.._stime
+DRV (14)/0	_Driver14.PM	_DriverCommon	1	0x8300000000000101	12.04.2019 12:15:05.682
+DRV (14)/0	_Driver14.PE	_DriverCommon	200	0x8300000000000101	12.04.2019 12:15:05.682
+DRV (14)/0	_Driver14.DT	_DriverCommon	"kafka"	0x8300000000000101	12.04.2019 12:15:05.682
+DRV (14)/0	_Driver14.OV	_DriverCommon	0	0x8300000000000101	12.04.2019 12:15:05.682
+EV (2)/0	CONFIG_KAFKA_14.ALM.ALM1	CONFIG_KAFKA	0	0x8300000000000101	12.04.2019 14:40:15.759
+CTL (26)/0	CONFIG_KAFKA_14.DRIVER_INFO.DRIVER_OVERLOADED	CONFIG_KAFKA	0	0x8300000000000101	12.04.2019 12:15:06.199
+EV (2)/0	CONFIG_KAFKA_14.DRIVER_INFO.MANAGER_CONNECTED	CONFIG_KAFKA	1	0x8300000000200101	12.04.2019 12:15:06.199
+CTL (26)/0	CONFIG_KAFKA_14.DRIVER_INFO.MANAGER_NUMBER	CONFIG_KAFKA	14	0x8300000000000101	12.04.2019 12:15:06.199
+CTL (21)/0	CONFIG_KAFKA_14.DebouncingThreadInterval	CONFIG_KAFKA	50	0x8300000000000101	12.04.2019 14:40:59.456
+CTL (21)/0	CONFIG_KAFKA_14.DebugLvl	CONFIG_KAFKA	2	0x8300000000200101	12.04.2019 14:40:59.456
+CTL (21)/0	CONFIG_KAFKA_14.IN.DriverName	CONFIG_KAFKA	"KAFKA@14"	0x8300000000000101	12.04.2019 14:40:15.700
+CTL (21)/0	CONFIG_KAFKA_14.IN.DrvVersion	CONFIG_KAFKA	"?"	0x8300000000000101	12.04.2019 14:40:15.697
+CTL (26)/0	CONFIG_KAFKA_14.IN.LastConfigurationTime	CONFIG_KAFKA	0	0x8300000000000101	12.04.2019 12:15:06.199
+CTL (21)/0	CONFIG_KAFKA_14.IN.ProducerAllBrokersDown	CONFIG_KAFKA	"0"	0x8300000000000101	12.04.2019 14:40:15.687
+DRV (14)/0	CONFIG_KAFKA_14.IN.ProducerStatsDP	CONFIG_KAFKA	""	0x8300000000300101	12.04.2019 14:43:06.750
+DRV (14)/0	CONFIG_KAFKA_14.IN.ConsumerStatsDP	CONFIG_KAFKA	""	0x8300000000300101	12.04.2019 14:43:06.750
+CTL (21)/0	CONFIG_KAFKA_14.IN.NoConsumerConfig	CONFIG_KAFKA	0	0x8300000000000101	12.04.2019 14:40:15.668
+CTL (21)/0	CONFIG_KAFKA_14.IN.NoProducerConfig	CONFIG_KAFKA	0	0x8300000000000101	12.04.2019 14:40:15.681
+CTL (21)/0	CONFIG_KAFKA_14.MaxPollRecords	CONFIG_KAFKA	1000	0x8300000000300101	12.04.2019 14:40:59.456
+
+# AlertValue
+Manager/User	ElementName	TypeName	DetailNr	_alert_hdl.._type	_alert_hdl.._l_limit	_alert_hdl.._u_limit	_alert_hdl.._l_incl	_alert_hdl.._u_incl	_alert_hdl.._panel	_alert_hdl.._panel_param	_alert_hdl.._help	_alert_hdl.._min_prio	_alert_hdl.._class	_alert_hdl.._text	_alert_hdl.._active	_alert_hdl.._orig_hdl	_alert_hdl.._ok_range	_alert_hdl.._hyst_type	_alert_hdl.._hyst_time	_alert_hdl.._multi_instance	_alert_hdl.._l_hyst_limit	_alert_hdl.._u_hyst_limit	_alert_hdl.._text1	_alert_hdl.._text0	_alert_hdl.._ack_has_prio	_alert_hdl.._order	_alert_hdl.._dp_pattern	_alert_hdl.._dp_list	_alert_hdl.._prio_pattern	_alert_hdl.._abbr_pattern	_alert_hdl.._ack_deletes	_alert_hdl.._non_ack	_alert_hdl.._came_ack	_alert_hdl.._pair_ack	_alert_hdl.._both_ack	_alert_hdl.._impulse	_alert_hdl.._filter_threshold	_alert_hdl.._went_text	_alert_hdl.._add_text	_alert_hdl.._status64_pattern	_alert_hdl.._neg	_alert_hdl.._status64_match	_alert_hdl.._match	_alert_hdl.._set
+CTL (21)/0	CONFIG_KAFKA_14.ALM.ALM1	CONFIG_KAFKA		13					""	""	lt:1 LANG:10001 ""	\0			1	0				0																0								
+CTL (21)/0	CONFIG_KAFKA_14.ALM.ALM1	CONFIG_KAFKA	1	5									 	lt:1 LANG:10001 ""				0	01.01.1970 00:00:00.000																			lt:1 LANG:10001 ""	 	0x0	0	""	"*"	
+CTL (21)/0	CONFIG_KAFKA_14.ALM.ALM1	CONFIG_KAFKA	2	5									_fwWarningAck.	lt:1 LANG:10001 ""				0	01.01.1970 00:00:00.000																			lt:1 LANG:10001 ""	 	0x0	0	""	"1"	
+
+# DistributionInfo
+Manager/User	ElementName	TypeName	_distrib.._type	_distrib.._driver
+CTL (21)/0	CONFIG_KAFKA_14.DebouncingThreadInterval	CONFIG_KAFKA	56	\14
+CTL (21)/0	CONFIG_KAFKA_14.DebugLvl	CONFIG_KAFKA	56	\14
+CTL (21)/0	CONFIG_KAFKA_14.IN.DrvVersion	CONFIG_KAFKA	56	\14
+CTL (21)/0	CONFIG_KAFKA_14.IN.ProducerAllBrokersDown	CONFIG_KAFKA	56	\14
+CTL (21)/0	CONFIG_KAFKA_14.IN.ProducerStatsDP	CONFIG_KAFKA	56	\14
+CTL (21)/0	CONFIG_KAFKA_14.IN.ConsumerStatsDP	CONFIG_KAFKA	56	\14
+CTL (21)/0	CONFIG_KAFKA_14.IN.NoConsumerConfig	CONFIG_KAFKA	56	\14
+CTL (21)/0	CONFIG_KAFKA_14.IN.NoProducerConfig	CONFIG_KAFKA	56	\14
+CTL (21)/0	CONFIG_KAFKA_14.MaxPollRecords	CONFIG_KAFKA	56	\14
+
+# DpFunction
+Manager/User	ElementName	TypeName	_dp_fct.._type	_dp_fct.._param	_dp_fct.._fct	_dp_fct.._global	_dp_fct.._old_new_compare	_dp_fct.._stat_type	_dp_fct.._interval	_dp_fct.._time	_dp_fct.._day_of_week	_dp_fct.._day	_dp_fct.._month	_dp_fct.._delay	_dp_fct.._read_archive	_dp_fct.._inv_func	_dp_fct.._inv_limit	_dp_fct.._def_func	_dp_fct.._def_limit	_dp_fct.._user1_func	_dp_fct.._user1_limit	_dp_fct.._user2_func	_dp_fct.._user2_limit	_dp_fct.._user3_func	_dp_fct.._user3_limit	_dp_fct.._user4_func	_dp_fct.._user4_limit	_dp_fct.._user5_func	_dp_fct.._user5_limit	_dp_fct.._user6_func	_dp_fct.._user6_limit	_dp_fct.._user7_func	_dp_fct.._user7_limit	_dp_fct.._user8_func	_dp_fct.._user8_limit	_dp_fct.._interm_res	_dp_fct.._interm_res_cyc
+CTL (21)/0	CONFIG_KAFKA_14.ALM.ALM1	CONFIG_KAFKA	60	CONFIG_KAFKA_14.DRIVER_INFO.MANAGER_CONNECTED:_original.._value	"!p1"		0
+CTL (21)/0	CONFIG_KAFKA_14.DRIVER_INFO.DRIVER_OVERLOADED	CONFIG_KAFKA	60	_ReduManager.Status.Active:_original.._value, _ReduManager_2.Status.Active:_original.._value, _Driver14.OV:_original.._value, _Driver14_2.OV:_original.._value	"(p1 &&p3) || (p2  && p4)"		0
+CTL (21)/0	CONFIG_KAFKA_14.DRIVER_INFO.MANAGER_CONNECTED	CONFIG_KAFKA	60	CONFIG_KAFKA_14.DRIVER_INFO.MANAGER_NUMBER:_original.._value, _ReduManager.Status.Active:_original.._value, _ReduManager_2.Status.Active:_original.._value, _Connections.Driver.ManNums:_original.._value, _Connections_2.Driver.ManNums:_original.._value	"(p2 &&dynContains(p4,p1)) || (p3 &&dynContains(p5,p1))"		0
+
+# PeriphAddrMain
+Manager/User	ElementName	TypeName	_address.._type	_address.._reference	_address.._poll_group	_address.._connection	_address.._offset	_address.._subindex	_address.._direction	_address.._internal	_address.._lowlevel	_address.._active	_address.._start	_address.._interval	_address.._reply	_address.._datatype	_address.._drv_ident
+CTL (21)/0	CONFIG_KAFKA_14.DebouncingThreadInterval	CONFIG_KAFKA	16	"DEBOUNCINGTHREADINTERVAL"	 	 	0	0	\1	0	0	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1002	"KAFKA"
+CTL (21)/0	CONFIG_KAFKA_14.DebugLvl	CONFIG_KAFKA	16	"DEBUGLVL"	 	 	0	0	\1	0	0	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1002	"KAFKA"
+CTL (21)/0	CONFIG_KAFKA_14.IN.DrvVersion	CONFIG_KAFKA	16	"VERSION"	 	 	0	0	\2	0	0	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1005	"KAFKA"
+CTL (21)/0	CONFIG_KAFKA_14.IN.ProducerAllBrokersDown	CONFIG_KAFKA	16	"PRODUCER_ALL_BROKERS_DOWN"	 	 	0	0	\2	0	0	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1000	"KAFKA"
+CTL (21)/0	CONFIG_KAFKA_14.IN.ProducerStatsDP	CONFIG_KAFKA	16	"PRODUCER_STATISTICS"	 	 	0	0	\2	0	0	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1005	"KAFKA"
+CTL (21)/0	CONFIG_KAFKA_14.IN.ConsumerStatsDP	CONFIG_KAFKA	16	"CONSUMER_STATISTICS"	 	 	0	0	\2	0	0	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1005	"KAFKA"
+CTL (21)/0	CONFIG_KAFKA_14.IN.NoConsumerConfig	CONFIG_KAFKA	16	"PRODUCER_NO_CONFIG"	 	 	0	0	\2	0	0	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1000	"KAFKA"
+CTL (21)/0	CONFIG_KAFKA_14.IN.NoProducerConfig	CONFIG_KAFKA	16	"PRODUCER_NO_CONFIG"	 	 	0	0	\2	0	0	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1000	"KAFKA"
+CTL (21)/0	CONFIG_KAFKA_14.MaxPollRecords	CONFIG_KAFKA	16	"MAXPOLLRECORDS"	 	 	0	0	\1	0	0	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1002	"KAFKA"

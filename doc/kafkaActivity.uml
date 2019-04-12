@@ -1,0 +1,153 @@
+/** © Copyright 2019 CERN
+ *
+ * This software is distributed under the terms of the
+ * GNU Lesser General Public Licence version 3 (LGPL Version 3),
+ * copied verbatim in the file “LICENSE”
+ *
+ * In applying this licence, CERN does not waive the privileges
+ * and immunities granted to it by virtue of its status as an
+ * Intergovernmental Organization or submit itself to any jurisdiction.
+ *
+ * Author: Alexandru Savulescu (HSE-CEN-CO)
+ *
+ **/
+
+kafkaActivity.uml
+Created on: 10.04.2019
+Author: Alexandru Savulescu (HSE-CEN-CO)
+
+
+@startuml
+start
+
+:Read <b>config.kafka</b> file;
+note right
+    Reads all producer and consumer 
+    configuration entries.
+    <b>kafkaResources::readSection()</b>
+end note   
+:kafkaHWService::start() ;
+split
+    if(Producer config available?) then (yes)
+        :Start Kafka Producer
+        + set callbacks;
+        (P)
+        note left
+            <b>kafkaProducerFacade</b>
+        end note
+        :start AsynchronousTask for polling
+        <b>kafkaHWService::doPoll()</b>
+        This will trigger producer statistics;
+        :start AsynchronousTask for stream debouncing
+        <b>kafkaHWService::doStream()</b>;
+    else (no)    
+    endif
+
+split again
+    :For each topic addressed in the driver
+    launch a consumer thread (+callbacks);
+    note left
+        <b>kafkaHWService::
+        <b>handleNewConsumerTopic()
+    end note
+    fork
+        :Consumer 1;
+        (C)
+        detach
+    fork again
+        :Consumer 2;
+        (C)
+        detach
+    fork again 
+        -[#black,dotted]->
+        :Consumer N;
+        -[#black,dotted]->
+        (C)
+        note right
+            <b>kafkaConsumerFacade</b>
+        end note    
+        detach
+    end fork
+
+    split again 
+    :callback for new consumer threads
+    whenever a new topic is addressed;
+    (C)
+    note left
+        kafkaHWMapper::
+        <b>setNewConsumerTopicCallback()</b>
+    end note
+    detach
+
+end split
+
+
+fork
+    partition kafkaHWService::writeData() {
+        start
+        :Decode HWObject from WinCC;
+        if(object is Kafka stream) then 
+            if(debouncing timeframe > 0?) then (yes, it's bigger than 0)
+                :add stream to <b>_streamMap</b>;
+                fork 
+                   partition <AsyncTask>kafkaHWService::doStream() {
+                        start
+                        while (_streamMap entries to process?) is (yes)
+                        :retrieve entry;
+                        if(debouncing timeframe is over for entry?) then (yes)
+                            :remove entry from _streamMap
+                            and stream to kafka;
+                            (P)
+                        else (no)
+                            :skip entry;    
+                        endif
+                        endwhile(no)
+                        stop
+                   }
+                end fork
+            else (no)    
+                ->no, stream to kafka;
+                (P)
+            endif;
+        else if(object is Config item) then
+            :Apply config;
+        endif
+        stop
+    }
+fork again 
+    partition ConsumerThread{
+        start
+        while(_consumerRun?) is (yes)
+            (C)
+            note right 
+                <b>kafkaConsumerFacade.poll()</b>
+            end note
+            while (polled messages to process?) is (yes)
+                :<b>kafkaHWService::
+                <b>handleConsumeNewMessage</b>;
+                :add DPE to <b>_toDPqueue</b>;
+                note right
+                    <b>kafkaHWService::insertInDataToDP</b>
+                end note
+            endwhile (no)   
+        endwhile (no)
+        stop
+    }
+    partition kafkaHWService::workProc() {
+        start
+        while (<b>_toDPqueue</b> items to process?) is (yes)
+            if (item addressed in the driver?) then (yes)
+                :push DPE entry to WinCC;
+                note right
+                    <b>DrvManager::getSelfPtr()->toDp</b>
+                end note
+            endif
+        endwhile (no)  
+        stop
+    }
+    
+end fork
+
+
+end
+@enduml
