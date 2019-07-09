@@ -57,10 +57,12 @@ The user has the following possibilites:
 
 * C++11 STL
 * WinCC OA API libraries
-* [librdkafka](./libs) under BSD2 (available as git submodule)
-* [cppkafka](./libs) under BSD2 (available as git submodule)
+* [librdkafka](./libs) under BSD2 (available as git submodule. Our working version commit is @ `8695b9d6`)
+* [cppkafka](./libs) under BSD2 (available as git submodule. Our working version commit is @ `df4eaa07`)
 * cyrus-sasl-gssapi
 * boost
+* cmake
+* openssl-dev
 
 
 <a name="toc2.1"></a>
@@ -75,9 +77,9 @@ After cloning this repository run
 This will perform the following:
 
     1. Retrieve the `librdkafka` and `cppkafka` git submodules in the `libs` folder
-    2. Install `boost` and `cyrus-sasl-gssapi` libraries (if needed)
-    3. Launch the build&install process for `librdkafka` (if needed) 
-    4. Launch the build&install process for `cppkafka` (if needed) 
+    2. Install `boost`, `cyrus-sasl-gssapi`, `openssl-dev` and `cmake` libraries (if needed)
+    3. Launch the build&install process for `librdkafka`
+    4. Launch the build&install process for `cppkafka`
     NOTE: you need sudo rights
 
 <a name="toc3"></a>

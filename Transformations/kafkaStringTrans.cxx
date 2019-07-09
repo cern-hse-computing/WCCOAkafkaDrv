@@ -21,6 +21,7 @@
 
 #include <stdio.h>
 #include "REMUS/Logger.hxx"
+
 //----------------------------------------------------------------------------
 namespace Transformations {
 

@@ -39,11 +39,10 @@ WCCOAkafkaDrv: $(MYOBJS) $(REMUS_TYPES) $(TRANSFORMATIONS)
 
 
 installLibs:
-	rpm -qa | egrep -q cyrus-sasl-gssapi || sudo yum install --assumeyes cyrus-sasl-gssapi
-	rpm -qa | egrep -q boost || sudo yum install --assumeyes boost*
+	sudo yum install --assumeyes cyrus-sasl-gssapi boost* cmake openssl-devel 
 	git submodule update --init --recursive
-	locate -i /usr/local/lib/librdkafka || locate -i /usr/local/include/librdkafka ||(cd ./libs/librdkafka && ./configure && make && sudo make install)
-	locate -i /usr/local/lib/libcppkafka || locate -i /usr/local/include/cppkafka || (cd ./libs/cppkafka && mkdir -p build && cd build && cmake .. && make && sudo make install)
+	cd ./libs/librdkafka && ./configure && make && sudo make install
+	cd ./libs/cppkafka && mkdir -p build && cd build && cmake .. && make && sudo make install
 	
 
 install: WCCOAkafkaDrv
