@@ -15,18 +15,17 @@
 // Our transformation class PVSS <--> Hardware
 #include "kafkaStringTrans.hxx"
 #include <ErrHdl.hxx>     // The Error handler Basics/Utilities
-#include <TextVar.hxx>    // Our Variable type Basics/Variables
+
 
 #include "kafkaHWMapper.hxx"
 
-#include <stdio.h>
 #include "REMUS/Logger.hxx"
 
 //----------------------------------------------------------------------------
 namespace Transformations {
 
 
-//kafkaStringTrans::kafkaStringTrans() : Transformation() {}
+//kafkaStringTrans::kafkaStringTrans() : Transformation() { }
 
 TransformationType kafkaStringTrans::isA() const
 {
