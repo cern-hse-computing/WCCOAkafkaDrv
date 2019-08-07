@@ -1,4 +1,7 @@
-CERN HSE-CEN-CO
+CERN HSE Computing  (HSE-CEN-CO)
+==================================================
+
+Contact email: hse-cen-co@cern.ch
 
 REMUS WinCC OA Kafka Driver
 ==================================================
@@ -20,7 +23,7 @@ REMUS WinCC OA Kafka Driver
 
 4. [Config file](#toc4)
 
-    4.1 [Keytab](#toc4.1)
+    4.1 [Keytab (CERN Only)](#toc4.1)
 
 5. [WinCC OA Installation](#toc5)
 
@@ -143,7 +146,7 @@ In this config file you can add other producer or consumer configuration entries
 
 <a name="toc4.1"></a>
 
-## 4.1 Keytab ##
+## 4.1 Keytab (CERN Only) ##
 
 To be able to access kafka, you will need to create a keytab. 
 
