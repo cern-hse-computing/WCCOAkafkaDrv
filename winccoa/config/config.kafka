@@ -1,0 +1,9 @@
+[kafka]
+PRODUCER.CONFIG.metadata.broker.list = dbnile-kafka-a-5.cern.ch:9093,dbnile-kafka-b-5.cern.ch:9093,dbnile-kafka-c-5.cern.ch:9093
+PRODUCER.CONFIG.security.protocol = SASL_SSL
+PRODUCER.CONFIG.sasl.mechanism = GSSAPI
+PRODUCER.CONFIG.sasl.kerberos.service.name = kafka
+PRODUCER.CONFIG.sasl.kerberos.principal = [USER_NAME]
+PRODUCER.CONFIG.sasl.kerberos.keytab = [PROJECT_PATH]/config/rd.keytab
+PRODUCER.CONFIG.group.id = test-consumer-group
+PRODUCER.CONFIG.statistics.interval.ms = 60000
