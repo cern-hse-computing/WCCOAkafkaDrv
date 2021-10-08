@@ -63,6 +63,7 @@ The user has the following possibilites:
 * [librdkafka](./libs) under BSD2 (available as git submodule. Our working version commit is @ `8695b9d6`)
 * [cppkafka](./libs) under BSD2 (available as git submodule. Our working version commit is @ `df4eaa07`)
 * cyrus-sasl-gssapi
+* cyrus-sasl-devel
 * boost
 * cmake
 * openssl-dev
@@ -80,7 +81,7 @@ After cloning this repository run
 This will perform the following:
 
     1. Retrieve the `librdkafka` and `cppkafka` git submodules in the `libs` folder
-    2. Install `boost`, `cyrus-sasl-gssapi`, `openssl-dev` and `cmake` libraries (if needed)
+    2. Install `boost`, `cyrus-sasl-gssapi`, `cyrus-sasl-devel`, `openssl-dev` and `cmake` libraries (if needed)
     3. Launch the build&install process for `librdkafka`
     4. Launch the build&install process for `cppkafka`
     NOTE: you need sudo rights
@@ -163,6 +164,15 @@ Edit the `config/config.kafka` file in your WinCC OA project and update the `CON
 For example: 
 
     [kafka]
+    PRODUCER.CONFIG.metadata.broker.list = dbnile-kafka-a-8.cern.ch:9093,dbnile-kafka-b-8.cern.ch:9093,dbnile-kafka-c-8.cern.ch:9093
+    PRODUCER.CONFIG.security.protocol = SASL_SSL
+    PRODUCER.CONFIG.sasl.mechanism = GSSAPI
+    PRODUCER.CONFIG.sasl.kerberos.service.name = kafka
+    PRODUCER.CONFIG.sasl.kerberos.principal = jdoe
+    PRODUCER.CONFIG.sasl.kerberos.keytab = /home/jdoe/Workspace/jdoe.keytab
+    PRODUCER.CONFIG.group.id = test-producer-group-demo
+    PRODUCER.CONFIG.statistics.interval.ms = 60000
+
     CONSUMER.CONFIG.metadata.broker.list = dbnile-kafka-a-8.cern.ch:9093,dbnile-kafka-b-8.cern.ch:9093,dbnile-kafka-c-8.cern.ch:9093
     CONSUMER.CONFIG.security.protocol = SASL_SSL
     CONSUMER.CONFIG.sasl.mechanism = GSSAPI
@@ -284,8 +294,14 @@ For example
     * The kafka topic: remustest_demo
     * The key key: MeasurementJSON123
 
-There is a ready-to-launch kafka consumer demo project available with full instructions here: 
-* https://gitlab.cern.ch/hse-see-co/REMUS/kafka-consumer-demo
+There is a ready-to-launch WinCCOA 3.16 kafka consumer demo project available here: 
+    * [winccoa316_demo_project/kafka_producer_consumer_demo.zip](./winccoa316_demo_project/kafka_producer_consumer_demo.zip)
+    
+ To make it work,  generate a file user.keytab in the config folder, and update the config files:
+config/config
+config/config.kafka 
+with the appropriate project apth and user names
+
 
 <a name="toc6.2.4"></a>
 
