@@ -35,10 +35,10 @@
  **/
 
 #include <map>
-#include <REMUS/Utils.hxx>
-#include <REMUS/Logger.hxx>
+#include <Common/Utils.hxx>
+#include <Common/Logger.hxx>
 
-namespace REMUS{
+namespace Common{
 
 /*!
  * \class Constants
@@ -199,15 +199,15 @@ inline void Constants::setProducerKafkaStatsInterval(){
     int milis;
     try
     {
-        if(!REMUS::Utils::convertToInt(REMUS::Constants::GetProducerConfig().at(REMUS::Constants::CONFIG_STATISTICS_INTERVAL_MS), milis))
+        if(!Common::Utils::convertToInt(Common::Constants::GetProducerConfig().at(Common::Constants::CONFIG_STATISTICS_INTERVAL_MS), milis))
         {
-            milis = REMUS::Constants::CONFIG_STATISTICS_INTERVAL_MS_DEFAULT; // DEFAULT
+            milis = Common::Constants::CONFIG_STATISTICS_INTERVAL_MS_DEFAULT; // DEFAULT
         }
     }
     catch(std::exception& e)
     {
-        REMUS::Logger::globalWarning(__PRETTY_FUNCTION__," Constants ProducerConfig does not have ", REMUS::Constants::CONFIG_STATISTICS_INTERVAL_MS);
-        milis = REMUS::Constants::CONFIG_STATISTICS_INTERVAL_MS_DEFAULT; // DEFAULT
+        Common::Logger::globalWarning(__PRETTY_FUNCTION__," Constants ProducerConfig does not have ", Common::Constants::CONFIG_STATISTICS_INTERVAL_MS);
+        milis = Common::Constants::CONFIG_STATISTICS_INTERVAL_MS_DEFAULT; // DEFAULT
     }
     PRODUCER_KAFKA_STATS_INTERVAL = milis;
 }
@@ -220,15 +220,15 @@ inline void Constants::setConsumerKafkaStatsInterval(){
     int milis;
     try
     {
-        if(!REMUS::Utils::convertToInt(REMUS::Constants::GetConsumerConfig().at(REMUS::Constants::CONFIG_STATISTICS_INTERVAL_MS), milis))
+        if(!Common::Utils::convertToInt(Common::Constants::GetConsumerConfig().at(Common::Constants::CONFIG_STATISTICS_INTERVAL_MS), milis))
         {
-            milis = REMUS::Constants::CONFIG_STATISTICS_INTERVAL_MS_DEFAULT; // DEFAULT
+            milis = Common::Constants::CONFIG_STATISTICS_INTERVAL_MS_DEFAULT; // DEFAULT
         }
     }
     catch(std::exception& e)
     {
-        REMUS::Logger::globalWarning(__PRETTY_FUNCTION__," Constants ConsumerConfig does not have ", REMUS::Constants::CONFIG_STATISTICS_INTERVAL_MS);
-        milis = REMUS::Constants::CONFIG_STATISTICS_INTERVAL_MS_DEFAULT; // DEFAULT
+        Common::Logger::globalWarning(__PRETTY_FUNCTION__," Constants ConsumerConfig does not have ", Common::Constants::CONFIG_STATISTICS_INTERVAL_MS);
+        milis = Common::Constants::CONFIG_STATISTICS_INTERVAL_MS_DEFAULT; // DEFAULT
     }
     CONSUMER_KAFKA_STATS_INTERVAL = milis;
 }

@@ -15,8 +15,8 @@
 #include <csignal>
 
 #include "kafkaConsumerFacade.hxx"
-#include "REMUS/Constants.hxx"
-#include "REMUS/Logger.hxx"
+#include "Common/Constants.hxx"
+#include "Common/Logger.hxx"
 
 #include "cppkafka/message.h"
 #include "cppkafka/kafka_handle_base.h"
@@ -43,7 +43,7 @@ kafkaConsumerFacade::kafkaConsumerFacade(const std::string& topic, consumeCallba
     try{
         //Create kafka configuration
         Configuration config;
-        for (const auto & kv : REMUS::Constants::GetConsumerConfig())
+        for (const auto & kv : Common::Constants::GetConsumerConfig())
         {
             std::cerr << kv.first << " - "<< kv.second << std::endl;
             config.set(kv.first, kv.second);
@@ -52,12 +52,12 @@ kafkaConsumerFacade::kafkaConsumerFacade(const std::string& topic, consumeCallba
         //Update consumer group id to be unique by appending topic and current timestamp
         try
         {
-            config.set(REMUS::Constants::GROUP_ID_KEYWORD, config.get(REMUS::Constants::GROUP_ID_KEYWORD) + "_" + topic  + "_" + std::to_string(std::chrono::seconds(std::time(NULL)).count()));
+            config.set(Common::Constants::GROUP_ID_KEYWORD, config.get(Common::Constants::GROUP_ID_KEYWORD) + "_" + topic  + "_" + std::to_string(std::chrono::seconds(std::time(NULL)).count()));
         }
         catch (ConfigOptionNotFound& e)
         {
-             REMUS::Logger::globalWarning("No group id found! Adding default one: topicname_unixtimestamp", e.what());
-             config.set(REMUS::Constants::GROUP_ID_KEYWORD, topic + "_" + std::to_string(std::chrono::seconds(std::time(NULL)).count()));
+             Common::Logger::globalWarning("No group id found! Adding default one: topicname_unixtimestamp", e.what());
+             config.set(Common::Constants::GROUP_ID_KEYWORD, topic + "_" + std::to_string(std::chrono::seconds(std::time(NULL)).count()));
         }
 
         // set the error and statistics callbacks on the kafka config
@@ -80,13 +80,13 @@ kafkaConsumerFacade::kafkaConsumerFacade(const std::string& topic, consumeCallba
     }
     catch(std::exception& e)
     {
-        REMUS::Logger::globalWarning("Unable to initialize consumer!", e.what());
+        Common::Logger::globalWarning("Unable to initialize consumer!", e.what());
     }
 }
 
 void kafkaConsumerFacade::poll(const size_t& maxPollRecords)
 {
-    REMUS::Logger::globalInfo(REMUS::Logger::L2, __PRETTY_FUNCTION__, "Poll batch with maxPollRecords:", CharString(maxPollRecords));
+    Common::Logger::globalInfo(Common::Logger::L2, __PRETTY_FUNCTION__, "Poll batch with maxPollRecords:", CharString(maxPollRecords));
     std::vector<Message> msgVec = std::move(_consumer->poll_batch(maxPollRecords));
     for (auto & msg : msgVec )
     {

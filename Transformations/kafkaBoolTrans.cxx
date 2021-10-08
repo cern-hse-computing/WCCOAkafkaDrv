@@ -16,7 +16,7 @@
 
 #include "kafkaHWMapper.hxx"
 
-#include "REMUS/Logger.hxx"
+#include "Common/Logger.hxx"
 
 #include <cmath>
 
@@ -84,7 +84,7 @@ VariablePtr kafkaBoolTrans::toVar(const PVSSchar *buffer, const PVSSuint dlen, c
             return new BitVar(true);
         else
         {
-            REMUS::Logger::globalWarning(__PRETTY_FUNCTION__, "Unable to parse boolean for buffer:", (const char*)buffer);
+            Common::Logger::globalWarning(__PRETTY_FUNCTION__, "Unable to parse boolean for buffer:", (const char*)buffer);
         }
     }
     return NULL;

@@ -1,9 +1,9 @@
-CERN HSE Computing  (HSE-CEN-CO)
+CERN HSE Computing  (HSE-TS-CS)
 ==================================================
 
 Contact email: hse-cen-co@cern.ch
 
-REMUS WinCC OA Kafka Driver
+WinCC OA Kafka Driver
 ==================================================
 
 

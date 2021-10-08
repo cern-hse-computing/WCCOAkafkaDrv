@@ -21,8 +21,8 @@
 #include "kafkaProducerFacade.hxx"
 #include "kafkaConsumerFacade.hxx"
 
-#include "REMUS/Logger.hxx"
-#include "REMUS/AsyncRecurringTask.hxx"
+#include "Common/Logger.hxx"
+#include "Common/AsyncRecurringTask.hxx"
 #include <queue>
 #include <chrono>
 #include <unordered_map>
@@ -103,8 +103,8 @@ private:
     };
 
     std::unordered_map<std::string, streamStruct> _streamMap;
-    std::unique_ptr<REMUS::AsyncRecurringTask<std::function<void()>>> _streamAsyncTask;
-    std::unique_ptr<REMUS::AsyncRecurringTask<std::function<void()>>> _poolAsyncTask;
+    std::unique_ptr<Common::AsyncRecurringTask<std::function<void()>>> _streamAsyncTask;
+    std::unique_ptr<Common::AsyncRecurringTask<std::function<void()>>> _poolAsyncTask;
     void doStream();
 
     std::vector<std::thread> _consumerThreads;

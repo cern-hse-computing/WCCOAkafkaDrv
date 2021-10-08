@@ -25,21 +25,21 @@ define INSTALL_BODY
 	fi;
 endef
 
-REMUS_SOURCE = $(wildcard REMUS/*.cxx)
-REMUS_TYPES = $(REMUS_SOURCE:.cxx=.o)
+COMMON_SOURCE = $(wildcard Common/*.cxx)
+COMMON_TYPES = $(COMMON_SOURCE:.cxx=.o)
 
 TRANSFORMATIONS_SOURCE = $(wildcard Transformations/*.cxx)
 TRANSFORMATIONS = $(TRANSFORMATIONS_SOURCE:.cxx=.o)
 
 
-WCCOAkafkaDrv: $(MYOBJS) $(REMUS_TYPES) $(TRANSFORMATIONS)
+WCCOAkafkaDrv: $(MYOBJS) $(COMMON_TYPES) $(TRANSFORMATIONS)
 	@rm -f addVerInfo.o
 	@$(MAKE) addVerInfo.o
 	$(LINK_CMD) -o $(DRV_NAME) *.o $(OBJS) $(LIBS)
 
 
 installLibs:
-	sudo yum install --assumeyes cyrus-sasl-gssapi boost* cmake openssl-devel 
+	sudo yum install --assumeyes cyrus-sasl-gssapi cyrus-sasl-devel boost* cmake openssl-devel
 	git submodule update --init --recursive
 	cd ./libs/librdkafka && ./configure && make && sudo make install
 	cd ./libs/cppkafka && mkdir -p build && cd build && cmake .. && make && sudo make install

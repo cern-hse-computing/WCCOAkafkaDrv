@@ -16,7 +16,7 @@
 
 #include "kafkaHWMapper.hxx"
 
-#include "REMUS/Logger.hxx"
+#include "Common/Logger.hxx"
 
 #include <cmath>
 
@@ -82,7 +82,7 @@ VariablePtr kafkaInt32Trans::toVar(const PVSSchar *buffer, const PVSSuint dlen, 
         }
         catch(std::exception& e)
         {
-            REMUS::Logger::globalWarning(__PRETTY_FUNCTION__, e.what());
+            Common::Logger::globalWarning(__PRETTY_FUNCTION__, e.what());
         }
     }
 

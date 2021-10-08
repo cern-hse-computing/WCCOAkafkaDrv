@@ -16,7 +16,7 @@
 
 #include "kafkaHWMapper.hxx"
 
-#include "REMUS/Logger.hxx"
+#include "Common/Logger.hxx"
 
 #include <cmath>
 

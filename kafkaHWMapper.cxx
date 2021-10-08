@@ -21,8 +21,8 @@
 #include "Transformations/kafkaUint8Trans.hxx"
 #include "Transformations/kafkaTimeTrans.hxx"
 
-#include "REMUS/Logger.hxx"
-#include "REMUS/Utils.hxx"
+#include "Common/Logger.hxx"
+#include "Common/Utils.hxx"
 #include <PVSSMacros.hxx>     // DEBUG macros
 
 //--------------------------------------------------------------------------------
@@ -33,8 +33,8 @@ PVSSboolean kafkaHWMapper::addDpPa(DpIdentifier &dpId, PeriphAddr *confPtr)
   // We don't use Subindices here, so its simple.
   // Otherwise we had to look if we already have a HWObject and adapt its length.
 
-  REMUS::Logger::globalInfo(REMUS::Logger::L1,"addDpPa called for ", confPtr->getName().c_str());
-  REMUS::Logger::globalInfo(REMUS::Logger::L1,"addDpPa direction ", CharString(confPtr->getDirection()));
+  Common::Logger::globalInfo(Common::Logger::L1,"addDpPa called for ", confPtr->getName().c_str());
+  Common::Logger::globalInfo(Common::Logger::L1,"addDpPa direction ", CharString(confPtr->getDirection()));
 
 
   // tell the config how we will transform data to/from the device
@@ -47,38 +47,38 @@ PVSSboolean kafkaHWMapper::addDpPa(DpIdentifier &dpId, PeriphAddr *confPtr)
   // with the SIM driver parametrization panel
   switch ((uint32_t)confPtr->getTransformationType()) {
   case TransUndefinedType:
-      REMUS::Logger::globalInfo(REMUS::Logger::L3,"Undefined transformation" + CharString(confPtr->getTransformationType()));
+      Common::Logger::globalInfo(Common::Logger::L3,"Undefined transformation" + CharString(confPtr->getTransformationType()));
       return HWMapper::addDpPa(dpId, confPtr);
   case kafkaDrvBoolTransType:
-        REMUS::Logger::globalInfo(REMUS::Logger::L3,"Bool transformation");
+        Common::Logger::globalInfo(Common::Logger::L3,"Bool transformation");
         confPtr->setTransform(new Transformations::kafkaBoolTrans);
         break;
   case kafkaDrvUint8TransType:
-      REMUS::Logger::globalInfo(REMUS::Logger::L3,"Uint8 transformation");
+      Common::Logger::globalInfo(Common::Logger::L3,"Uint8 transformation");
       confPtr->setTransform(new Transformations::kafkaUint8Trans);
       break;
   case kafkaDrvInt32TransType:
-      REMUS::Logger::globalInfo(REMUS::Logger::L3,"Int32 transformation");
+      Common::Logger::globalInfo(Common::Logger::L3,"Int32 transformation");
       confPtr->setTransform(new Transformations::kafkaInt32Trans);
       break;
   case kafkaDrvInt64TransType:
-      REMUS::Logger::globalInfo(REMUS::Logger::L3,"Int64 transformation");
+      Common::Logger::globalInfo(Common::Logger::L3,"Int64 transformation");
       confPtr->setTransform(new Transformations::kafkaInt64Trans);
       break;
   case kafkaDrvFloatTransType:
-      REMUS::Logger::globalInfo(REMUS::Logger::L3,"Float transformation");
+      Common::Logger::globalInfo(Common::Logger::L3,"Float transformation");
       confPtr->setTransform(new Transformations::kafkaFloatTrans);
       break;
   case kafkaDrvStringTransType:
-        REMUS::Logger::globalInfo(REMUS::Logger::L3,"String transformation");
+        Common::Logger::globalInfo(Common::Logger::L3,"String transformation");
         confPtr->setTransform(new Transformations::kafkaStringTrans);
         break;
   case kafkaDrvTimeTransType:
-        REMUS::Logger::globalInfo(REMUS::Logger::L3,"Time transformation");
+        Common::Logger::globalInfo(Common::Logger::L3,"Time transformation");
         confPtr->setTransform(new Transformations::kafkaTimeTrans);
         break;
   default:
-      REMUS::Logger::globalError("kafkaHWMapper::addDpPa", CharString("Illegal transformation type ") + CharString((int) confPtr->getTransformationType()));
+      Common::Logger::globalError("kafkaHWMapper::addDpPa", CharString("Illegal transformation type ") + CharString((int) confPtr->getTransformationType()));
       return HWMapper::addDpPa(dpId, confPtr);
   }
 
@@ -88,7 +88,7 @@ PVSSboolean kafkaHWMapper::addDpPa(DpIdentifier &dpId, PeriphAddr *confPtr)
 
   HWObject *hwObj = new HWObject;
   // Set Address and Subindex
-  REMUS::Logger::globalInfo(REMUS::Logger::L3, "New Object", "name:" + confPtr->getName());
+  Common::Logger::globalInfo(Common::Logger::L3, "New Object", "name:" + confPtr->getName());
   hwObj->setConnectionId(confPtr->getConnectionId());
   hwObj->setAddress(confPtr->getName());       // Resolve the HW-Address, too
 
@@ -104,7 +104,7 @@ PVSSboolean kafkaHWMapper::addDpPa(DpIdentifier &dpId, PeriphAddr *confPtr)
 
   if(confPtr->getDirection() == DIRECTION_IN)
   {
-      std::vector<std::string> streamOptions = REMUS::Utils::split(hwObj->getAddress().c_str());
+      std::vector<std::string> streamOptions = Common::Utils::split(hwObj->getAddress().c_str());
       if (streamOptions.size() == 2) // TOPIC + KEY
       {
         addTopic(streamOptions[0]);

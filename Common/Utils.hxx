@@ -33,7 +33,7 @@ std::ostream& operator << (std::ostream& os, const std::vector<T>& iterable)
 }
 
 
-namespace REMUS {
+namespace Common {
 
 using std::future;
 using std::future_status;

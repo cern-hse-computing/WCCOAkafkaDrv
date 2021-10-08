@@ -14,8 +14,8 @@
 
 #include <kafkaDrv.hxx>
 #include <kafkaResources.hxx>
-#include "REMUS/Logger.hxx"
-#include "REMUS/Constants.hxx"
+#include "Common/Logger.hxx"
+#include "Common/Constants.hxx"
 
 #include <signal.h>
 #include <stdlib.h>
@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 
   resources.init(argc, argv);
 
-  kafkaResources::setDriverType(REMUS::Constants::getDrvName().c_str());
+  kafkaResources::setDriverType(Common::Constants::getDrvName().c_str());
 
   // the user wants to know std. commandline options
   if ( resources.getHelpFlag() )
@@ -67,10 +67,10 @@ int main(int argc, char **argv)
       return 0;
   }
   catch(std::exception& e){
-      REMUS::Logger::globalWarning("Exception");
+      Common::Logger::globalWarning("Exception");
       if(driver)
           driver->exit(0);
-      REMUS::Logger::globalError(e.what());
+      Common::Logger::globalError(e.what());
   }
   return 0;
 

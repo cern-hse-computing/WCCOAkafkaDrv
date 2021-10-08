@@ -26,7 +26,7 @@
 using std::mutex;
 using std::lock_guard;
 
-namespace REMUS {
+namespace Common {
 
 /*!
  * \class Debug

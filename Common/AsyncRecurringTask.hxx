@@ -28,7 +28,7 @@
  */
 
 
-namespace REMUS
+namespace Common
 {
     template <class Task>
     class AsyncRecurringTask

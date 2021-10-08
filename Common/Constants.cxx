@@ -16,7 +16,7 @@
 #include "Logger.hxx"
 #include "Utils.hxx"
 
-namespace REMUS {
+namespace Common {
 
     // Common
     std::string Constants::drv_name = "kafka";
@@ -42,19 +42,22 @@ namespace REMUS {
         {   "DEBUGLVL",
             [](const char* data)
             {
-                REMUS::Logger::setLogLvl((int)*reinterpret_cast<const int32_t*>(data));
+								Common::Logger::globalInfo(Common::Logger::L1, "setLogLvl:", CharString(data));
+                Common::Logger::setLogLvl((int)std::atoi(data));
             }
         },
         {   "DEBOUNCINGTHREADINTERVAL",
             [](const char* data)
             {
-              REMUS::Constants::setDebouncingThreadInterval((int)*reinterpret_cast<const int32_t*>(data));
+							Common::Logger::globalInfo(Common::Logger::L1, "setDebouncingThreadInterval:", CharString(data));
+              Common::Constants::setDebouncingThreadInterval((int)std::atoi(data));
             }
         },
         {   "MAXPOLLRECORDS",
             [](const char* data)
             {
-              REMUS::Constants::setConsumerMaxPollRecords((size_t)*reinterpret_cast<const int32_t*>(data));
+							Common::Logger::globalInfo(Common::Logger::L1, "setConsumerMaxPollRecords:", CharString(data));
+              Common::Constants::setConsumerMaxPollRecords((size_t)std::atoi(data));
             }
         }
 

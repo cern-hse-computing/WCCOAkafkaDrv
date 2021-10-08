@@ -13,8 +13,8 @@
  **/
 
 #include "kafkaProducerFacade.hxx"
-#include "REMUS/Constants.hxx"
-#include "REMUS/Logger.hxx"
+#include "Common/Constants.hxx"
+#include "Common/Logger.hxx"
 
 #include "cppkafka/message.h"
 #include "cppkafka/kafka_handle_base.h"
@@ -43,7 +43,7 @@ kafkaProducerFacade::kafkaProducerFacade(errorCallback ecb=nullptr, statsCallbac
     : _errorCB(ecb), _statsCB(scb)
 {
     Configuration config;
-    for (const auto & kv : REMUS::Constants::GetProducerConfig())
+    for (const auto & kv : Common::Constants::GetProducerConfig())
     {
         config.set(kv.first, kv.second);
     }

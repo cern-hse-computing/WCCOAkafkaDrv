@@ -16,10 +16,10 @@
 
 #include <DrvManager.hxx>
 #include <PVSSMacros.hxx>     // DEBUG macros
-#include "REMUS/Logger.hxx"
-#include "REMUS/Constants.hxx"
-#include "REMUS/Utils.hxx"
-#include "REMUS/AsyncRecurringTask.hxx"
+#include "Common/Logger.hxx"
+#include "Common/Constants.hxx"
+#include "Common/Utils.hxx"
+#include "Common/AsyncRecurringTask.hxx"
 
 #include "kafkaHWMapper.hxx"
 #include "kafkaConsumerFacade.hxx"
@@ -45,16 +45,16 @@ PVSSboolean kafkaHWService::initialize(int argc, char *argv[])
 {
   // use this function to initialize internals
   // if you don't need it, you can safely remove the whole method
-  REMUS::Logger::globalInfo(REMUS::Logger::L1,__PRETTY_FUNCTION__,"start");
+  Common::Logger::globalInfo(Common::Logger::L1,__PRETTY_FUNCTION__,"start");
 
   //Constants (at this point, the config file has been read)
-  REMUS::Constants::setProducerKafkaStatsInterval();
-  REMUS::Constants::setConsumerKafkaStatsInterval();
+  Common::Constants::setProducerKafkaStatsInterval();
+  Common::Constants::setConsumerKafkaStatsInterval();
 
   // add callback for new consumer topics
   static_cast<kafkaHWMapper*>(DrvManager::getHWMapperPtr())->setNewConsumerTopicCallback(_newConsumerTopicCB);
 
-  REMUS::Logger::globalInfo(REMUS::Logger::L1,__PRETTY_FUNCTION__,"end");
+  Common::Logger::globalInfo(Common::Logger::L1,__PRETTY_FUNCTION__,"end");
   // To stop driver return PVSS_FALSE
   return PVSS_TRUE;
 }
@@ -62,13 +62,13 @@ PVSSboolean kafkaHWService::initialize(int argc, char *argv[])
 // in order to get statistics, poll() has to be called in the producer facade.
 void kafkaHWService::doPoll()
 {
-    REMUS::Logger::globalInfo(REMUS::Logger::L3,__PRETTY_FUNCTION__,"Calling poll");
+    Common::Logger::globalInfo(Common::Logger::L3,__PRETTY_FUNCTION__,"Calling poll");
     this->_producerFacade->poll();
 }
 
 void kafkaHWService::doStream()
 {
-    REMUS::Logger::globalInfo(REMUS::Logger::L4,__PRETTY_FUNCTION__,"Calling doStream");
+    Common::Logger::globalInfo(Common::Logger::L4,__PRETTY_FUNCTION__,"Calling doStream");
     auto now = std::chrono::high_resolution_clock::now();
     for(auto& kv : _streamMap)
     {
@@ -83,7 +83,7 @@ void kafkaHWService::doStream()
                     std::lock_guard<std::mutex> lck(_streamMutex);
                     s = std::move(kv.second);
                 }
-                REMUS::Logger::globalInfo(REMUS::Logger::L2,"<stream><out>",(s.topic+"$"+s.key).c_str(), s.JSONvalue.c_str());
+                Common::Logger::globalInfo(Common::Logger::L2,"<stream><out>",(s.topic+"$"+s.key).c_str(), s.JSONvalue.c_str());
                 _producerFacade->stream(s.topic,/* partition,*/ s.key,std::move(s.JSONvalue));
             }
         }
@@ -93,7 +93,7 @@ void kafkaHWService::doStream()
 
 void kafkaHWService::handleProducerConfigError(int code, const std::string& str)
 {
-    REMUS::Logger::globalWarning(__PRETTY_FUNCTION__,CharString(code),str.c_str());
+    Common::Logger::globalWarning(__PRETTY_FUNCTION__,CharString(code),str.c_str());
     if(code == -187)
     {
         _brokersDown = true;
@@ -105,14 +105,14 @@ void kafkaHWService::handleProducerConfigError(int code, const std::string& str)
 
 void kafkaHWService::handleProducerConfigStats(const std::string& jsonStats)
 {
-    REMUS::Logger::globalInfo(REMUS::Logger::L1, __PRETTY_FUNCTION__,"Statistics: ",jsonStats.c_str());
+    Common::Logger::globalInfo(Common::Logger::L1, __PRETTY_FUNCTION__,"Statistics: ",jsonStats.c_str());
     insertInDataToDp(PRODUCER_STATS_DP,CharString(jsonStats.c_str(),jsonStats.length()));
 }
 
 
 void kafkaHWService::handleProducerSuccess(const std::string& message)
 {
-    REMUS::Logger::globalInfo(REMUS::Logger::L3,__PRETTY_FUNCTION__, message.c_str());
+    Common::Logger::globalInfo(Common::Logger::L3,__PRETTY_FUNCTION__, message.c_str());
     if(_brokersDown)
     {
         _brokersDown = false;
@@ -125,12 +125,12 @@ void kafkaHWService::handleProducerSuccess(const std::string& message)
 
 void kafkaHWService::handleConsumerConfigError(const std::string& topic, int code, const std::string& str)
 {
-     REMUS::Logger::globalWarning(__PRETTY_FUNCTION__, CharString(topic.c_str(), topic.length()), str.c_str());
+     Common::Logger::globalWarning(__PRETTY_FUNCTION__, CharString(topic.c_str(), topic.length()), str.c_str());
 }
 
 void kafkaHWService::handleConsumerConfigStats(const std::string&topic, const std::string& jsonStats)
 {
-    REMUS::Logger::globalInfo(REMUS::Logger::L1, __PRETTY_FUNCTION__,topic.c_str(), jsonStats.c_str());
+    Common::Logger::globalInfo(Common::Logger::L1, __PRETTY_FUNCTION__,topic.c_str(), jsonStats.c_str());
 
     insertInDataToDp(CONSUMER_STATS_DP,CharString(jsonStats.c_str(),jsonStats.length()));
     //insertInDataToDp(CharString(CONSUMER_STATS_DP_BASE)+CharString(topic.c_str(), topic.length()),CharString(jsonStats.c_str(),jsonStats.length())); //TODO - consumer logs per topic
@@ -138,13 +138,13 @@ void kafkaHWService::handleConsumerConfigStats(const std::string&topic, const st
 
 void kafkaHWService::handleConsumeNewMessage(const std::string& topic, const std::string& key, std::string&& payload )
 {
-    REMUS::Logger::globalInfo(REMUS::Logger::L3, __PRETTY_FUNCTION__, (topic + ":" + key + ":" + payload).c_str());
+    Common::Logger::globalInfo(Common::Logger::L3, __PRETTY_FUNCTION__, (topic + ":" + key + ":" + payload).c_str());
     insertInDataToDp(std::move(CharString((topic+"$"+key).c_str())),std::move(CharString(payload.c_str(),payload.length())));
 }
 
 void kafkaHWService::handleNewConsumerTopic(const std::string& topic)
 {
-    REMUS::Logger::globalInfo(REMUS::Logger::L1,__PRETTY_FUNCTION__, "New topic:", topic.c_str());
+    Common::Logger::globalInfo(Common::Logger::L1,__PRETTY_FUNCTION__, "New topic:", topic.c_str());
     _consumerThreads.emplace_back(
                 [&]
         {
@@ -152,18 +152,18 @@ void kafkaHWService::handleNewConsumerTopic(const std::string& topic)
             kafkaConsumerFacade aConsumerFacade(topic,this->_configConsumeCB, this->_configErrorConsumerCB, this->_configStatsConsumerCB);
             if(!aConsumerFacade.isInitialized())
             {
-                 REMUS::Logger::globalError("Unable to initialize topic:", topic.c_str());
+                 Common::Logger::globalError("Unable to initialize topic:", topic.c_str());
             }
             else
             {
                 while(_consumerRun)
                 {
-                      aConsumerFacade.poll(REMUS::Constants::getConsumerMaxPollRecords());
+                      aConsumerFacade.poll(Common::Constants::getConsumerMaxPollRecords());
                 }
             }
 
         });
-    REMUS::Logger::globalInfo(REMUS::Logger::L1,__PRETTY_FUNCTION__, "New topic done:", topic.c_str());
+    Common::Logger::globalInfo(Common::Logger::L1,__PRETTY_FUNCTION__, "New topic done:", topic.c_str());
 }
 
 //--------------------------------------------------------------------------------
@@ -172,26 +172,26 @@ void kafkaHWService::handleNewConsumerTopic(const std::string& topic)
 PVSSboolean kafkaHWService::start()
 {
   // use this function to start your hardware activity.
-  REMUS::Logger::globalInfo(REMUS::Logger::L1,__PRETTY_FUNCTION__);
+  Common::Logger::globalInfo(Common::Logger::L1,__PRETTY_FUNCTION__);
 
   // See if we need to launch a producer
-  if(REMUS::Constants::hasProducerConfig())
+  if(Common::Constants::hasProducerConfig())
   {
        // kafka Callbacks
       _producerFacade.reset(new kafkaProducerFacade(_configErrorProducerCB, _configStatsProducerCB));
       if(!_producerFacade)
       {
-          REMUS::Logger::globalError("kafkaHWService::initialize Unable to intialize the producer!");
+          Common::Logger::globalError("kafkaHWService::initialize Unable to intialize the producer!");
           return PVSS_FALSE;
       }
 
       // Async Recurring tasks
-      _poolAsyncTask.reset(new REMUS::AsyncRecurringTask<std::function<void()>>(std::move([this]() { this->doPoll(); }), REMUS::Constants::getProducerKafkaStatsInterval()));
-      _streamAsyncTask.reset(new REMUS::AsyncRecurringTask<std::function<void()>>(std::move([this]() { this->doStream(); }) , REMUS::Constants::getDebouncingThreadInterval()));
+      _poolAsyncTask.reset(new Common::AsyncRecurringTask<std::function<void()>>(std::move([this]() { this->doPoll(); }), Common::Constants::getProducerKafkaStatsInterval()));
+      _streamAsyncTask.reset(new Common::AsyncRecurringTask<std::function<void()>>(std::move([this]() { this->doStream(); }) , Common::Constants::getDebouncingThreadInterval()));
   }
   else
   {
-       REMUS::Logger::globalInfo(REMUS::Logger::L1,__PRETTY_FUNCTION__,"No producer configuration provided");
+       Common::Logger::globalInfo(Common::Logger::L1,__PRETTY_FUNCTION__,"No producer configuration provided");
   }
 
    // Check if we need to launch consumer(s)
@@ -210,7 +210,7 @@ PVSSboolean kafkaHWService::start()
 void kafkaHWService::stop()
 {
   // use this function to stop your hardware activity.
-  REMUS::Logger::globalInfo(REMUS::Logger::L1,__PRETTY_FUNCTION__,"Stop");
+  Common::Logger::globalInfo(Common::Logger::L1,__PRETTY_FUNCTION__,"Stop");
   _consumerRun = false;
   for(auto& ct : _consumerThreads)
   {
@@ -227,7 +227,7 @@ void kafkaHWService::workProc()
 
   // TODO somehow receive a message from your device
   std::lock_guard<std::mutex> lock{_toDPmutex};
-  REMUS::Logger::globalInfo(REMUS::Logger::L3,__PRETTY_FUNCTION__,"Size", CharString(_toDPqueue.size()));
+  Common::Logger::globalInfo(Common::Logger::L3,__PRETTY_FUNCTION__,"Size", CharString(_toDPqueue.size()));
   while (!_toDPqueue.empty())
   {
     auto pair = std::move(_toDPqueue.front());
@@ -247,7 +247,7 @@ void kafkaHWService::workProc()
     // ok, we found it; now send to the DPEs
     if ( addrObj )
     {
-      REMUS::Logger::globalInfo(REMUS::Logger::L2,__PRETTY_FUNCTION__, pair.first, pair.second);
+      Common::Logger::globalInfo(Common::Logger::L2,__PRETTY_FUNCTION__, pair.first, pair.second);
       //addrObj->debugPrint();
       obj.setOrgTime(TimeVar());  // current time
       obj.setDlen(pair.second.len()); // data
@@ -270,21 +270,21 @@ void kafkaHWService::insertInDataToDp(CharString&& address, CharString&& value)
 
 PVSSboolean kafkaHWService::writeData(HWObject *objPtr)
 {
-//  REMUS::Logger::globalInfo(REMUS::Logger::L2,__PRETTY_FUNCTION__,"Incoming obj address",objPtr->getAddress());
+//  Common::Logger::globalInfo(Common::Logger::L2,__PRETTY_FUNCTION__,"Incoming obj address",objPtr->getAddress());
 
-  std::vector<std::string> streamOptions = REMUS::Utils::split(objPtr->getAddress().c_str());
+  std::vector<std::string> streamOptions = Common::Utils::split(objPtr->getAddress().c_str());
 
   // CONFIG DPs have just 1
   if(streamOptions.size() == 1)
   {
       try
       {
-        REMUS::Logger::globalInfo(REMUS::Logger::L2,"Incoming CONFIG address",objPtr->getAddress(), objPtr->getInfo() );
-        REMUS::Constants::GetParseMap().at(std::string(objPtr->getAddress().c_str()))((const char*)objPtr->getData());
+        Common::Logger::globalInfo(Common::Logger::L2,"Incoming CONFIG address",objPtr->getAddress(), objPtr->getInfo() );
+        Common::Constants::GetParseMap().at(std::string(objPtr->getAddress().c_str()))((const char*)objPtr->getData());
       }
       catch (std::exception& e)
       {
-          REMUS::Logger::globalWarning(__PRETTY_FUNCTION__," No configuration handling for address:", objPtr->getAddress().c_str());
+          Common::Logger::globalWarning(__PRETTY_FUNCTION__," No configuration handling for address:", objPtr->getAddress().c_str());
       }
   }
   else if (streamOptions.size() == STREAM_OPTIONS_SIZE || streamOptions.size() == STREAM_OPTIONS_SIZE - 1) // streaming
@@ -292,26 +292,26 @@ PVSSboolean kafkaHWService::writeData(HWObject *objPtr)
 
     if(!streamOptions[STREAM_OPTIONS_TOPIC].length())
     {
-        REMUS::Logger::globalWarning(__PRETTY_FUNCTION__," Empty topic name");
+        Common::Logger::globalWarning(__PRETTY_FUNCTION__," Empty topic name");
         return PVSS_FALSE;
     }
     int debouncing_timeframe = 0; // default value is 0 for debouncing timeframe
-    if(streamOptions.size() == STREAM_OPTIONS_SIZE && !REMUS::Utils::convertToInt(streamOptions[STREAM_OPTIONS_DEBOUNCING_TIMEFRAME], debouncing_timeframe))
+    if(streamOptions.size() == STREAM_OPTIONS_SIZE && !Common::Utils::convertToInt(streamOptions[STREAM_OPTIONS_DEBOUNCING_TIMEFRAME], debouncing_timeframe))
     {
-        REMUS::Logger::globalWarning(__PRETTY_FUNCTION__," Cannot parse debouncing timeframe", streamOptions[STREAM_OPTIONS_DEBOUNCING_TIMEFRAME].c_str());
+        Common::Logger::globalWarning(__PRETTY_FUNCTION__," Cannot parse debouncing timeframe", streamOptions[STREAM_OPTIONS_DEBOUNCING_TIMEFRAME].c_str());
         return PVSS_FALSE;
     }
     //    int partition = -1;
-    //    if(!REMUS::Utils::convertToInt(streamOptions[STREAM_OPTIONS_PARTITION], partition))
+    //    if(!Common::Utils::convertToInt(streamOptions[STREAM_OPTIONS_PARTITION], partition))
     //    {
-    //        REMUS::Logger::globalWarning(__PRETTY_FUNCTION__," Cannot parse partition", streamOptions[STREAM_OPTIONS_PARTITION].c_str());
+    //        Common::Logger::globalWarning(__PRETTY_FUNCTION__," Cannot parse partition", streamOptions[STREAM_OPTIONS_PARTITION].c_str());
     //        return PVSS_FALSE;
     //    }
 
     if(!debouncing_timeframe) // no debouncing timeframe, stream directly
     {
          _producerFacade->stream(streamOptions[STREAM_OPTIONS_TOPIC],streamOptions[STREAM_OPTIONS_KEY], /* partition,*/std::move(std::string((char*)objPtr->getDataPtr())));
-         REMUS::Logger::globalInfo(REMUS::Logger::L2,"<stream><in-out>",objPtr->getAddress(), (char*)objPtr->getDataPtr() );
+         Common::Logger::globalInfo(Common::Logger::L2,"<stream><in-out>",objPtr->getAddress(), (char*)objPtr->getDataPtr() );
 
     }
     else // debouncing time frame, add it to stream map. The async task doStream will take care of streaming
@@ -323,7 +323,7 @@ PVSSboolean kafkaHWService::writeData(HWObject *objPtr)
                                                           debouncing_timeframe,
                                                           std::move(std::string((char*)objPtr->getDataPtr()/*, objPtr->getDlen()*/))
                                                           };
-        REMUS::Logger::globalInfo(REMUS::Logger::L2,"<stream><in>",objPtr->getAddress(), (char*)objPtr->getDataPtr() );
+        Common::Logger::globalInfo(Common::Logger::L2,"<stream><in>",objPtr->getAddress(), (char*)objPtr->getDataPtr() );
 
     }
 
@@ -331,7 +331,7 @@ PVSSboolean kafkaHWService::writeData(HWObject *objPtr)
   }
   else
   {
-      REMUS::Logger::globalWarning(__PRETTY_FUNCTION__," Invalid stream options size for address: ", objPtr->getAddress().c_str());
+      Common::Logger::globalWarning(__PRETTY_FUNCTION__," Invalid stream options size for address: ", objPtr->getAddress().c_str());
   }
 
   return PVSS_TRUE;
@@ -349,7 +349,7 @@ void handleSegfault(int signal_code){
 
     // print out all the frames to stderr
     fprintf(stderr, "Error: signal %d:\n", signal_code);
-    REMUS::Logger::globalWarning("kafkaHWService suffered a segmentation fault, code " + CharString(signal_code));
+    Common::Logger::globalWarning("kafkaHWService suffered a segmentation fault, code " + CharString(signal_code));
     backtrace_symbols_fd(array, size, STDERR_FILENO);
 
     // restore and trigger default handle (to get the core dump)

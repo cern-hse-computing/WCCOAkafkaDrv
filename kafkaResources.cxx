@@ -16,8 +16,8 @@
 // This class will interpret the command line and read the config file
 
 #include "kafkaResources.hxx"
-#include "REMUS/Logger.hxx"
-#include "REMUS/Constants.hxx"
+#include "Common/Logger.hxx"
+#include "Common/Constants.hxx"
 #include <ErrHdl.hxx>
 
 //-------------------------------------------------------------------------------
@@ -52,21 +52,21 @@ PVSSboolean kafkaResources::readSection()
     while ( (cfgState != CFG_SECT_START) && (cfgState != CFG_EOF) )
     {
       // TODO whatever you have to read from the config file
-      if( keyWord.startsWith(REMUS::Constants::PRODUCER_CONFIG_KEYWORD))
+      if( keyWord.startsWith(Common::Constants::PRODUCER_CONFIG_KEYWORD))
       {
-          std::string key = keyWord.substring(strlen(REMUS::Constants::PRODUCER_CONFIG_KEYWORD)).operator const char *();
+          std::string key = keyWord.substring(strlen(Common::Constants::PRODUCER_CONFIG_KEYWORD)).operator const char *();
           std::string value;
           cfgStream >> value;
-          REMUS::Constants::setProducerConfig(key, value);
-          REMUS::Logger::globalInfo(REMUS::Logger::L1, " kafkaResources::readSection Added PRODUCER key/value:", key.c_str(), value.c_str());
+          Common::Constants::setProducerConfig(key, value);
+          Common::Logger::globalInfo(Common::Logger::L1, " kafkaResources::readSection Added PRODUCER key/value:", key.c_str(), value.c_str());
       }
-      else if (keyWord.startsWith(REMUS::Constants::CONSUMER_CONFIG_KEYWORD))
+      else if (keyWord.startsWith(Common::Constants::CONSUMER_CONFIG_KEYWORD))
       {
-          std::string key = keyWord.substring(strlen(REMUS::Constants::CONSUMER_CONFIG_KEYWORD)).operator const char *();
+          std::string key = keyWord.substring(strlen(Common::Constants::CONSUMER_CONFIG_KEYWORD)).operator const char *();
           std::string value;
           cfgStream >> value;
-          REMUS::Constants::setConsumerConfig(key, value);
-          REMUS::Logger::globalInfo(REMUS::Logger::L1, " kafkaResources::readSection CONSUMER Added key/value:", key.c_str(), value.c_str());
+          Common::Constants::setConsumerConfig(key, value);
+          Common::Logger::globalInfo(Common::Logger::L1, " kafkaResources::readSection CONSUMER Added key/value:", key.c_str(), value.c_str());
       }
       else if ( !commonKeyWord() )
       {
@@ -84,7 +84,7 @@ PVSSboolean kafkaResources::readSection()
     }
   }
   catch(std::runtime_error& e){
-      REMUS::Logger::globalError(e.what());
+      Common::Logger::globalError(e.what());
       return PVSS_FALSE;
   }
   // So the loop will stop at the end of the file

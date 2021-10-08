@@ -49,8 +49,7 @@ class kafkaHWMapper : public HWMapper
     enum Direction
     {
         DIRECTION_OUT = 1,
-        DIRECTION_IN = 2,
-        DIRECTION_INOUT = 4
+        DIRECTION_IN = 2
     };
 };
 
