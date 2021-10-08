@@ -17,7 +17,7 @@
   <script name="Initialize" isEscaped="1"><![CDATA[main()
 {
   string dp;
-  
+
   if ($1==&quot;&quot;)
   {
     RootPanelOn(
@@ -32,9 +32,10 @@
           dp+&quot;PanelOff.PanelName:_original.._value&quot;,&quot;address&quot;);
   }
   paInitPanel($1,&quot;:_address&quot;);
-  
+
   int mode;
   getValue(&quot;einaus&quot;,&quot;number&quot;, mode);
+  setValue(&quot;inputmode&quot;,&quot;number&quot;,0);
   if(mode==0){
     setMultiValue(&quot;trans_art&quot;,&quot;selectedPos&quot;,6,//Outpouts are always string!
     &quot;trans_art&quot;,&quot;enabled&quot;,false);
@@ -79,7 +80,7 @@
     <prop name="Bordered">False</prop>
     <prop name="Fit">True</prop>
     <prop name="Transformable">True</prop>
-    <prop name="TextFormat">[0s,,,ALIGNMENT_BEGINNING]</prop>
+    <prop name="TextFormat">[0s,,,AlignLeft]</prop>
    </properties>
    <events>
     <script name="KeyboardFocusIn" isEscaped="1"><![CDATA[//EventOnFocus]]></script>
@@ -175,7 +176,7 @@
     <prop name="Bordered">False</prop>
     <prop name="Fit">True</prop>
     <prop name="Transformable">True</prop>
-    <prop name="TextFormat">[0s,,,ALIGNMENT_BEGINNING]</prop>
+    <prop name="TextFormat">[0s,,,AlignLeft]</prop>
    </properties>
    <events>
     <script name="KeyboardFocusIn" isEscaped="1"><![CDATA[//EventOnFocus]]></script>
@@ -213,7 +214,7 @@
     <prop name="Bordered">False</prop>
     <prop name="Fit">True</prop>
     <prop name="Transformable">True</prop>
-    <prop name="TextFormat">[0s,,,ALIGNMENT_BEGINNING]</prop>
+    <prop name="TextFormat">[0s,,,AlignLeft]</prop>
    </properties>
    <events>
     <script name="KeyboardFocusIn" isEscaped="1"><![CDATA[//EventOnFocus]]></script>
@@ -279,7 +280,7 @@
     <prop name="Bordered">False</prop>
     <prop name="Fit">True</prop>
     <prop name="Transformable">True</prop>
-    <prop name="TextFormat">[0s,,,ALIGNMENT_BEGINNING]</prop>
+    <prop name="TextFormat">[0s,,,AlignLeft]</prop>
    </properties>
    <events>
     <script name="KeyboardFocusIn" isEscaped="1"><![CDATA[//EventOnFocus]]></script>
@@ -345,7 +346,7 @@
     <prop name="Bordered">False</prop>
     <prop name="Fit">True</prop>
     <prop name="Transformable">True</prop>
-    <prop name="TextFormat">[0s,,,ALIGNMENT_BEGINNING]</prop>
+    <prop name="TextFormat">[0s,,,AlignLeft]</prop>
    </properties>
    <events>
     <script name="KeyboardFocusIn" isEscaped="1"><![CDATA[//EventOnFocus]]></script>
@@ -383,7 +384,7 @@
     <prop name="Bordered">False</prop>
     <prop name="Fit">True</prop>
     <prop name="Transformable">True</prop>
-    <prop name="TextFormat">[0s,,,ALIGNMENT_BEGINNING]</prop>
+    <prop name="TextFormat">[0s,,,AlignLeft]</prop>
    </properties>
   </shape>
   <shape Name="Text6" shapeType="PRIMITIVE_TEXT" layerId="0">
@@ -418,7 +419,7 @@
     <prop name="Bordered">False</prop>
     <prop name="Fit">True</prop>
     <prop name="Transformable">True</prop>
-    <prop name="TextFormat">[0s,,,ALIGNMENT_BEGINNING]</prop>
+    <prop name="TextFormat">[0s,,,AlignLeft]</prop>
    </properties>
    <events>
     <script name="KeyboardFocusIn" isEscaped="1"><![CDATA[//EventOnFocus]]></script>
@@ -456,7 +457,7 @@
     <prop name="Bordered">False</prop>
     <prop name="Fit">True</prop>
     <prop name="Transformable">True</prop>
-    <prop name="TextFormat">[0s,,,ALIGNMENT_BEGINNING]</prop>
+    <prop name="TextFormat">[0s,,,AlignLeft]</prop>
    </properties>
    <events>
     <script name="KeyboardFocusIn" isEscaped="1"><![CDATA[//EventOnFocus]]></script>
@@ -523,7 +524,7 @@
     <prop name="Size">141 24</prop>
     <prop name="BorderStyle">Normal</prop>
     <prop name="Editable">True</prop>
-    <prop name="TextFormat">[0s,,,ALIGNMENT_BEGINNING]</prop>
+    <prop name="TextFormat">[0s,,,AlignLeft]</prop>
    </properties>
   </shape>
   <shape Name="inputmode" shapeType="RADIO_BOX" layerId="0">
@@ -793,7 +794,7 @@ main(int button)
     <prop name="Size">481 24</prop>
     <prop name="BorderStyle">Normal</prop>
     <prop name="Editable">True</prop>
-    <prop name="TextFormat">[0s,,,ALIGNMENT_BEGINNING]</prop>
+    <prop name="TextFormat">[0s,,,AlignLeft]</prop>
    </properties>
   </shape>
  </shapes>

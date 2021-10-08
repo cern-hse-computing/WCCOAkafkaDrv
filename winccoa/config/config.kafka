@@ -1,9 +1,20 @@
 [kafka]
-PRODUCER.CONFIG.metadata.broker.list = dbnile-kafka-a-5.cern.ch:9093,dbnile-kafka-b-5.cern.ch:9093,dbnile-kafka-c-5.cern.ch:9093
+PRODUCER.CONFIG.metadata.broker.list = dbnile-kafka-a-8.cern.ch:9093,dbnile-kafka-b-8.cern.ch:9093,dbnile-kafka-c-8.cern.ch:9093
 PRODUCER.CONFIG.security.protocol = SASL_SSL
 PRODUCER.CONFIG.sasl.mechanism = GSSAPI
 PRODUCER.CONFIG.sasl.kerberos.service.name = kafka
-PRODUCER.CONFIG.sasl.kerberos.principal = [USER_NAME]
-PRODUCER.CONFIG.sasl.kerberos.keytab = [PROJECT_PATH]/config/rd.keytab
-PRODUCER.CONFIG.group.id = test-consumer-group
-PRODUCER.CONFIG.statistics.interval.ms = 60000
+PRODUCER.CONFIG.sasl.kerberos.principal = [USERNAME]
+PRODUCER.CONFIG.sasl.kerberos.keytab = [BASE_PATH]/kafka_producer_consumer_demo/config/user.keytab
+PRODUCER.CONFIG.group.id = test-producer-group-demo
+PRODUCER.CONFIG.statistics.interval.ms = 600000
+
+CONSUMER.CONFIG.metadata.broker.list = dbnile-kafka-a-8.cern.ch:9093,dbnile-kafka-b-8.cern.ch:9093,dbnile-kafka-c-8.cern.ch:9093
+CONSUMER.CONFIG.security.protocol = SASL_SSL
+CONSUMER.CONFIG.sasl.mechanism = GSSAPI
+CONSUMER.CONFIG.sasl.kerberos.service.name = kafka
+CONSUMER.CONFIG.sasl.kerberos.principal = [USERNAME]
+CONSUMER.CONFIG.sasl.kerberos.keytab = [BASE_PATH]/kafka_producer_consumer_demo/config/user.keytab
+CONSUMER.CONFIG.statistics.interval.ms = 600000
+CONSUMER.CONFIG.group.id = test-consumer-group-demo
+CONSUMER.CONFIG.enable.auto.commit = true
+CONSUMER.CONFIG.auto.offset.reset = latest
