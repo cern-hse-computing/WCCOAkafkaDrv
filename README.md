@@ -1,7 +1,7 @@
 CERN HSE Computing  (HSE-TS-CS)
 ==================================================
 
-Contact email: hse-cen-co@cern.ch
+Contact email: adrien.ledeul@cern.ch
 
 WinCC OA Kafka Driver
 ==================================================
@@ -185,12 +185,13 @@ Under the [winccoa folder](./winccoa/) you will find the following files that yo
 Notes:
 
     * This is a specific dump of the REMUS redundant project DPs 
-    * The internal driver number in the dump is 14. If it's unavailable to you, try to modify the dump file directly. 
+    * The internal driver number in the dump is 2. If it's unavailable to you, try to modify the dump file directly. 
 
 * [dplist/panels/para/address_kafka.pnl](./winccoa/panels/para/address_kafka.pnl) : a panel that you can use in para for kafka addressing. If you install this panel, then you will also need the WinCC OA scripts that go along:
 
     * [scripts/userDrivers.ctl](./winccoa/scripts/userDrivers.ctl)
     * [scripts/userPara.ctl](./winccoa/scripts/userPara.ctl)
+    * [scripts/libs/kafka_dpe_addressing.ctl](./winccoa/scripts/libs/kafka_dpe_addressing.ctl): Optional, functions to set peripth address from ctl
 
 
 
