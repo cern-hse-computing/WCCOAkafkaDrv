@@ -30,11 +30,12 @@ WinCC OA Kafka Driver
 6. [Ready-to-launch project (CERN only)](#toc6)
 
 	6.1. [Project demo set-up](#toc6.1)
-		6.1.1 [Kafka Topic](#toc6.1.1)
-		6.1.2 [Keytab](#toc6.1.2)
-		6.1.3 [Config](#toc6.1.3)
-		6.1.4 [Install libraries](#toc6.1.4)
-		6.1.5 [Run the project](#toc6.1.5)
+
+	* 6.1.1 [Kafka Topic](#toc6.1.1)
+	* 6.1.2 [Keytab](#toc6.1.2)
+	* 6.1.3 [Config](#toc6.1.3)
+	* 6.1.4 [Install libraries](#toc6.1.4)
+	* 6.1.5 [Run the project](#toc6.1.5)
 
 7. [Kafka Driver Technical Documentation](#toc7)
 
@@ -221,7 +222,7 @@ See [6.3 Driver configuration](#toc6.3) section for a brief descprition of relev
 A ready-to-launch WinCCOA 3.16 kafka consumer demo project available here:
 * [winccoa316_demo_project/kafka_producer_consumer_demo.zip](./winccoa316_demo_project/kafka_producer_consumer_demo.zip)
 
-<a name="toc7.1"></a>
+<a name="toc6.1"></a>
 
 ## 6.1 Project demo set-up ##
 
@@ -237,7 +238,7 @@ To be able to retrieve the values for the demo project, you need to get access f
 
 ## 6.1.2. Keytab
 
-To be able to access kafka, you will need to create a keytab. 
+To be able to access kafka, you will need to create a keytab, to replace the empty one in config/ 
 
 Please refer to official user guide, section `How to generate a keytab file`: 
 [CERN Kafka Official User Guide](https://nile-user-guide.web.cern.ch/nile-user-guide/kafka/security.html) 
@@ -346,7 +347,7 @@ The direction in the periphery  has to be set to `OUT`. The addressing is generi
 
 For more info on the addressing, see [Remus RealTime Evolution - KAFKA presentation](./doc/REMUS_RealTime_Evolution_-_KAFKA.pptx).
 
-<a name="toc6.2.3"></a>
+<a name="toc7.2.3"></a>
 
 ### 7.2.3 For data ingestion ###
 
@@ -387,7 +388,7 @@ To add a new transformation you need to do the following:
     * `::toVar(...)`   for Kafka driver to WinCC OA transformation
 
 
-<a name="toc6.3"></a>
+<a name="toc7.3"></a>
 
 ## 7.3 Driver Configuration ##
 
