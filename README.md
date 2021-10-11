@@ -27,20 +27,22 @@ WinCC OA Kafka Driver
 
 5. [WinCC OA Installation](#toc5)
 
-6. [Kafka Driver Technical Documentation](#toc6)
+6. [Ready-to-launch project](#toc6)
 
-    6.1. [Main entry points](#toc6.1)
+7. [Kafka Driver Technical Documentation](#toc7)
 
-    6.2. [Addressing DPEs with the Kafka driverl](#toc6.2)
+    7.1. [Main entry points](#toc7.1)
 
-    * 6.2.1 [Data types](#toc6.2.1)
-    * 6.2.2 [For streaming](#toc6.2.2)
-    * 6.2.3 [For data ingestion](#toc6.2.3)
-    * 6.2.4 [Adding a new type](#toc6.2.4)
+    7.2. [Addressing DPEs with the Kafka driverl](#toc7.2)
 
-    6.3 [Driver configuration](#toc6.3)
+    * 7.2.1 [Data types](#toc7.2.1)
+    * 7.2.2 [For streaming](#toc7.2.2)
+    * 7.2.3 [For data ingestion](#toc7.2.3)
+    * 7.2.4 [Adding a new type](#toc7.2.4)
 
-    6.4 [Activity diagram](#toc6.4)
+    7.3 [Driver configuration](#toc7.3)
+
+    7.4 [Activity diagram](#toc7.4)
 
 
 <a name="toc1"></a>
@@ -208,7 +210,7 @@ Notes:
 See [6.3 Driver configuration](#toc6.3) section for a brief descprition of relevant CONFIG_KAFKA DPEs.
 
 <a name="toc6"></a>
-# 6. ready-to-launch project #
+# 6. Ready-to-launch project #
 A ready-to-launch WinCCOA 3.16 kafka consumer demo project available here:
 
 * [winccoa316_demo_project/kafka_producer_consumer_demo.zip](./winccoa316_demo_project/kafka_producer_consumer_demo.zip)
