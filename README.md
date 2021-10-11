@@ -200,22 +200,25 @@ For example:
 
 Under the [winccoa folder](./winccoa/) you will find the following files that you need to copy to your project in the corresponding paths:
 
-* [dplist/kafka_driver_config.dpl](./winccoa/dplist/kafka_driver_config.dpl) : it contains `internal driver & CONFIG_KAFKA DPs`. Once you've successfully launched the driver in the WinCC project manangement, you can import it via the ASCII Manager(refer to the official WinCC OA Documentation).
+* [dplist/kafka_driver_config.dpl](./winccoa/dplist/kafka_driver_config.dpl) : it contains `CONFIG_KAFKA DP`. It is used to set the driver options such as log levels and to retreive consumer and producer statistics. Once you've successfully launched the driver in the WinCC project manangement, you can import it via the ASCII Manager(refer to the official WinCC OA Documentation).
 
 Notes:
 
-    * This is a specific dump of the REMUS redundant project DPs 
     * The internal driver number in the dump is 2. If it's unavailable to you, try to modify the dump file directly. 
 
 * [dplist/panels/para/address_kafka.pnl](./winccoa/panels/para/address_kafka.pnl) : a panel that you can use in para for kafka addressing. If you install this panel, then you will also need the WinCC OA scripts that go along:
 
     * [scripts/userDrivers.ctl](./winccoa/scripts/userDrivers.ctl)
     * [scripts/userPara.ctl](./winccoa/scripts/userPara.ctl)
-    * [scripts/libs/kafka_dpe_addressing.ctl](./winccoa/scripts/libs/kafka_dpe_addressing.ctl): Optional, functions to set peripth address from ctl
+
+In order to set up the addressing of kafka DPE form a control script, you may use the folowing library:
+    * [scripts/libs/kafka_dpe_addressing.ctl](./winccoa/scripts/libs/kafka_dpe_addressing.ctl).
+Usage:
+	`kafkaAddress_addressDPE("Consumer.point1", "mytopic$kafka_key$STRING", 2, kafkaAddress_MODE_IN);`
+	`kafkaAddress_addressDPE("Producer.point1", "mytopic$kafka_ke$100$STRING", 2, kafkaAddress_MODE_OUT);`
 
 
-
-See [6.3 Driver configuration](#toc6.3) section for a brief descprition of relevant CONFIG_KAFKA DPEs.
+See [7.3 Driver configuration](#toc7.3) section for a brief descprition of relevant CONFIG_KAFKA DPEs.
 
 <a name="toc6"></a>
 # 6. Ready-to-launch project (CERN only) #
