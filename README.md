@@ -209,9 +209,11 @@ See [6.3 Driver configuration](#toc6.3) section for a brief descprition of relev
 
 <a name="toc6"></a>
 # 6. ready-to-launch project #
-A ready-to-launch WinCCOA 3.16 kafka consumer demo project available here: * winccoa316_demo_project/kafka_producer_consumer_demo.zip
+A ready-to-launch WinCCOA 3.16 kafka consumer demo project available here:
 
-To make it work, generate a file user.keytab in the config folder, and update the config files: config/config config/config.kafka with the appropriate project apth and user names
+* [winccoa316_demo_project/kafka_producer_consumer_demo.zip](./winccoa316_demo_project/kafka_producer_consumer_demo.zip)
+
+To make it work, generate a file user.keytab in the config folder, and update the config files: config/config config/config.kafka with the appropriate project path and user names
 
 <a name="toc7"></a>
 
