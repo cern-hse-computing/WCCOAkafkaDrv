@@ -198,9 +198,9 @@ For example:
 
 # 5. WinCC OA Installation #
 
-Under the [winccoa folder](./winccoa/) you will find the following files that you need to copy to your project in the corresponding paths:
+Under the [winccoa folder](./winccoa/) you will find the following files that you need to copy to your pre-existing project in the corresponding paths:
 
-* [dplist/kafka_driver_config.dpl](./winccoa/dplist/kafka_driver_config.dpl) : it contains `CONFIG_KAFKA DP`. It is used to set the driver options such as log levels and to retreive consumer and producer statistics. Once you've successfully launched the driver in the WinCC project manangement, you can import it via the ASCII Manager(refer to the official WinCC OA Documentation).
+* [dplist/kafka_driver_config.dpl](./winccoa/dplist/kafka_driver_config.dpl) : it contains `CONFIG_KAFKA DPEs`. It is used to set the driver options such as log levels and to retreive consumer and producer statistics. Once you've successfully launched the driver in the WinCC project manangement, you can import it via the ASCII Manager(refer to the official WinCC OA Documentation).
 
 Notes:
 
@@ -214,6 +214,7 @@ Notes:
 In order to set up the addressing of kafka DPE form a control script, you may use the folowing library:
     * [scripts/libs/kafka_dpe_addressing.ctl](./winccoa/scripts/libs/kafka_dpe_addressing.ctl).
 Usage:
+
 	`kafkaAddress_addressDPE("Consumer.point1", "mytopic$kafka_key$STRING", 2, kafkaAddress_MODE_IN);`
 	`kafkaAddress_addressDPE("Producer.point1", "mytopic$kafka_ke$100$STRING", 2, kafkaAddress_MODE_OUT);`
 
