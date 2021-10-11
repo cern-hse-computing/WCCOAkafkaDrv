@@ -27,7 +27,14 @@ WinCC OA Kafka Driver
 
 5. [WinCC OA Installation](#toc5)
 
-6. [Ready-to-launch project](#toc6)
+6. [Ready-to-launch project (CERN only)](#toc6)
+
+	6.1. [Project demo set-up](#toc6.1)
+		6.1.1 [Kafka Topic](#toc6.1.1)
+		6.1.2 [Keytab](#toc6.1.2)
+		6.1.3 [Config](#toc6.1.3)
+		6.1.4 [Install libraries](#toc6.1.4)
+		6.1.5 [Run the project](#toc6.1.5)
 
 7. [Kafka Driver Technical Documentation](#toc7)
 
@@ -210,12 +217,63 @@ Notes:
 See [6.3 Driver configuration](#toc6.3) section for a brief descprition of relevant CONFIG_KAFKA DPEs.
 
 <a name="toc6"></a>
-# 6. Ready-to-launch project #
+# 6. Ready-to-launch project (CERN only) #
 A ready-to-launch WinCCOA 3.16 kafka consumer demo project available here:
-
 * [winccoa316_demo_project/kafka_producer_consumer_demo.zip](./winccoa316_demo_project/kafka_producer_consumer_demo.zip)
 
-To make it work, generate a file user.keytab in the config folder, and update the config files: config/config config/config.kafka with the appropriate project path and user names
+<a name="toc7.1"></a>
+
+## 6.1 Project demo set-up ##
+
+<a name="toc6.1.1"></a>
+
+### 6.1.1 Kafka Topic###
+
+The topic `remustest_demo` from where the values are retrieved in the demo is avaliable on the CERN `kafka-gptn` cluster. 
+
+To be able to retrieve the values for the demo project, you need to get access for this topic. Please subscribe to the [kafka-remustest-demo](https://e-groups.cern.ch/e-groups/Egroup.do?egroupId=10328116) egroup.
+
+<a name="toc6.1.2"></a>
+
+## 6.1.2. Keytab
+
+To be able to access kafka, you will need to create a keytab. 
+
+Please refer to official user guide, section `How to generate a keytab file`: 
+[CERN Kafka Official User Guide](https://nile-user-guide.web.cern.ch/nile-user-guide/kafka/security.html) 
+
+For example if you subscribed to `kafka-remustest-demo` egroup  with NICE user `jdoe`:
+```
+    cern-get-keytab --user --keytab jdoe.keytab --login jdoe
+```
+
+<a name="toc6.1.3"></a>
+
+## 6.1.3. Config
+
+Edit the `config/config.kafka` file and update the `CONSUMER.CONFIG.sasl.kerberos.keytab` entry to point to your keytab file and the `CONSUMER.CONFIG.sasl.kerberos.principal` to your CERN's NICE username.
+
+Edit the `config/config` file to point to the appropriate project path.
+
+<a name="toc6.1.4"></a>
+## 6.1.4. Install libraries
+
+First run :
+
+    sudo yum install cyrus-sasl-gssapi
+
+Then go to `bin/libs/` and run:
+
+    ./installLocal.sh
+
+This will copy the libraries and update dependencies. Note that you need sudo rights. 
+
+<a name="toc6.1.5"></a>
+
+## 6.1.5. Run the project
+
+Simply start the project in WinCC. A UI manager will launch para module, where producer and consumer DPEs are aleready set-up.
+Running the manager -f kafka_addressing_example.lst will demonstrate a dynamic addressing of kafka DPE from Control script (check code for details).
 
 <a name="toc7"></a>
 
