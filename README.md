@@ -289,9 +289,14 @@ This will copy the libraries and update dependencies. Note that you need sudo ri
 
 Simply register then start the project in WinCCOA. 
 
-A UI manager will launch para module, where producer and consumer DPEs are already set-up and running:
+A UI manager will launch para module, where producer and consumer DPEs are already set-up and running.
 
-![](./doc/kafkaDemoProjectDPEs.png)
+![](./doc/kafkaDemoProjectDPEs.gif)
+
+
+The manager -f kafka_producer_example.lst is continuously doing dpSets into the Producer DPEs, that are sending messages to the kafka topic "remustest_demo". The messages are transmitted to Kafka, then read by the Consumer DPEs.
+
+Since the messages are going through Kafka, they can of course be read/write from external software (other WCCOA project, java, python, MQTT, ...) communicating with the same topic, as demonstrated on the screeshot, where messages are sent through the kafka command line tool (https://kafka.apache.org/quickstart)
 
 (Optional) Running the manager -f kafka_addressing_example.lst will demonstrate a dynamic addressing of kafka DPE, both producers and consumers, from Control scripts.
 
