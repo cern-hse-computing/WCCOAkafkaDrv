@@ -207,14 +207,19 @@ Notes:
 
 See [6.3 Driver configuration](#toc6.3) section for a brief descprition of relevant CONFIG_KAFKA DPEs.
 
-
 <a name="toc6"></a>
+# 6. ready-to-launch project #
+A ready-to-launch WinCCOA 3.16 kafka consumer demo project available here: * winccoa316_demo_project/kafka_producer_consumer_demo.zip
 
-# 6. Kafka Driver Technical Documentation #
+To make it work, generate a file user.keytab in the config folder, and update the config files: config/config config/config.kafka with the appropriate project apth and user names
 
-<a name="toc6.1"></a>
+<a name="toc7"></a>
 
-## 6.1 Main entry points ##
+# 7. Kafka Driver Technical Documentation #
+
+<a name="toc7.1"></a>
+
+## 7.1 Main entry points ##
 After the driver startup, the main entry points in the driver are:
     
 * kafkaHwService::writeData() -> WinCC to Driver communication
@@ -228,13 +233,13 @@ After the driver startup, the main entry points in the driver are:
 Please refer to the WinCC documentation for more information on the WinCC OA API. 
 For more info on the debouncing, see [Remus RealTime Evolution - KAFKA presentation](./doc/REMUS_RealTime_Evolution_-_KAFKA.pptx).
 
-<a name="toc6.2"></a>
+<a name="toc7.2"></a>
 
-## 6.2 Addressing DPEs with the Kafka driver ##
+## 7.2 Addressing DPEs with the Kafka driver ##
 
-<a name="toc6.2.1"></a>
+<a name="toc7.2.1"></a>
 
-### 6.2.1 Data Types ###
+### 7.2.1 Data Types ###
 When the kafka driver pushes a DPE value to WinCC, a transformation takes place. See [Transformations folder](./Transformations). We are currently supporting the following data types for the periphery address:
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -249,9 +254,9 @@ When the kafka driver pushes a DPE value to WinCC, a transformation takes place.
 | time              | [kafkaTimeTrans.cxx](./Transformations/kafkaTimeTrans.cxx)    | 1006 (TransUserType + 6)                  |
 --------------------------------------------------------------------------------------------------------------------------------
 
-<a name="toc6.2.2"></a>
+<a name="toc7.2.2"></a>
 
-### 6.2.2 For streaming ###
+### 7.2.2 For streaming ###
 
 The periphery address data type has to be set to `string` (1005). 
 
@@ -281,7 +286,7 @@ For more info on the addressing, see [Remus RealTime Evolution - KAFKA presentat
 
 <a name="toc6.2.3"></a>
 
-### 6.2.3 For data ingestion ###
+### 7.2.3 For data ingestion ###
 
 
 The direction in the periphery address has to be set to `IN`. The addressing is generic: `<TOPIC>$<KEY>`. 
@@ -303,9 +308,9 @@ config/config.kafka
 with the appropriate project apth and user names
 
 
-<a name="toc6.2.4"></a>
+<a name="toc7.2.4"></a>
 
-### 6.2.4 Adding a new transformation ###
+### 7.2.4 Adding a new transformation ###
 
 To add a new transformation you need to do the following: 
 
@@ -322,7 +327,7 @@ To add a new transformation you need to do the following:
 
 <a name="toc6.3"></a>
 
-## 6.3 Driver Configuration ##
+## 7.3 Driver Configuration ##
 
 Available via the WinCC OA `CONFIG_KAFKA` DataPoint, we have the following 
 
@@ -336,8 +341,8 @@ Available via the WinCC OA `CONFIG_KAFKA` DataPoint, we have the following
 | IN.ConsumerStatsDP        | IN           | CONSUMER_STATISTICS           | STRING    | This is where the driver periodically pushes statistics from kafka consumer (json) |
 
 
-<a name="toc6.4"></a>
+<a name="toc7.4"></a>
 
-## 6.4 Activity Diagram ##
+## 7.4 Activity Diagram ##
 
 ![](./doc/kafkaActivity.png)
