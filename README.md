@@ -58,7 +58,7 @@ WinCC OA Kafka Driver
 # 1. Description #
 
 This is a generic WinCC OA driver used to stream and/or ingest data via Kafka. 
-The user has the following possibilites:
+The user has the following possibilities:
 
 * Run a producer
 * Run one or several consumers (one consumer per topic)
@@ -200,7 +200,7 @@ For example:
 
 Under the [winccoa folder](./winccoa/) you will find the following files that you need to copy to your pre-existing project in the corresponding paths:
 
-* [dplist/kafka_driver_config.dpl](./winccoa/dplist/kafka_driver_config.dpl) : it contains `CONFIG_KAFKA DPEs`. It is used to set the driver options such as log levels and to retreive consumer and producer statistics. Once you've successfully launched the driver in the WinCC project manangement, you can import it via the ASCII Manager(refer to the official WinCC OA Documentation).
+* [dplist/kafka_driver_config.dpl](./winccoa/dplist/kafka_driver_config.dpl) : it contains `CONFIG_KAFKA DPEs`. It is used to set the driver options such as log levels and to retreive consumer and producer statistics. Once you've successfully launched the driver in the WinCC project management, you can import it via the ASCII Manager(refer to the official WinCC OA Documentation).
 
 Notes:
 
@@ -243,7 +243,7 @@ Unzip it on a CentOS7 machine that have WinCCOA 3.16 installed. You will need su
 
 ### 6.1.2 Kafka Topic
 
-The topic `remustest_demo` from where the values are retrieved in the demo is avaliable on the CERN `kafka-gptn` cluster. 
+The topic `remustest_demo` from where the values are retrieved in the demo is available on the CERN `kafka-gptn` cluster. 
 
 To be able to retrieve the values for the demo project, you need to get access for this topic. Please subscribe to the [kafka-remustest-demo](https://e-groups.cern.ch/e-groups/Egroup.do?egroupId=10328116) egroup.
 
@@ -390,15 +390,6 @@ For example
     * The kafka topic: remustest_demo
     * The key key: MeasurementJSON123
 
-There is a ready-to-launch WinCCOA 3.16 kafka consumer demo project available here: 
-    * [winccoa316_demo_project/kafka_producer_consumer_demo.zip](./winccoa316_demo_project/kafka_producer_consumer_demo.zip)
-    
- To make it work,  generate a file user.keytab in the config folder, and update the config files:
-config/config
-config/config.kafka 
-with the appropriate project apth and user names
-
-
 <a name="toc7.2.4"></a>
 
 ### 7.2.4 Adding a new transformation ###
@@ -427,9 +418,11 @@ Available via the WinCC OA `CONFIG_KAFKA` DataPoint, we have the following
 | DebugLvl                  | OUT          | DEBUGLVL                      | INT32     | Debug Level for logging. You can use this to debug issues. (default 0)             |
 | DebouncingThreadInterval  | OUT          | DEBOUNCINGTHREADINTERVAL      | INT32     | In milliseconds. The sleep interval for the debouncing thread (default 50 ms)      |
 | MaxPollRecords            | OUT          | MAXPOLLRECORDS                | INT32     | MAximum number of records should the consumer poll retrieve (default 1000)         |
-| IN.ProducerStatsDP        | IN           | PRODUCER_STATISTICS           | STRING    | This is where the driver periodically pushes statistics from kafka producer (json) |
-| IN.ProducerAllBrokersDown | IN           | PRODUCER_ALL_BROKERS_DOWN     | BOOL      | Set by the when all brokers are down for the producer.            |                |
 | IN.ConsumerStatsDP        | IN           | CONSUMER_STATISTICS           | STRING    | This is where the driver periodically pushes statistics from kafka consumer (json) |
+| IN.ProducerStatsDP        | IN           | PRODUCER_STATISTICS           | STRING    | This is where the driver periodically pushes statistics from kafka producer (json) |
+| IN.ProducerAllBrokersDown | IN           | PRODUCER_ALL_BROKERS_DOWN     | BOOL      | Set by the when all brokers are down for the producer.                             |
+| IN.NoConsumerConfig       | IN           | CONSUMER_NO_CONFIG            | BOOL      | Indicates there is no consumer configuration available.                            |
+| IN.NoProducerConfig       | IN           | PRODUCER_NO_CONFIG            | BOOL      | Indicates there is no producer configuration available.                            |
 
 
 <a name="toc7.4"></a>
