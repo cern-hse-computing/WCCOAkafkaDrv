@@ -215,8 +215,8 @@ In order to set up the addressing of kafka DPE form a control script, you may us
     * [scripts/libs/kafka_dpe_addressing.ctl](./winccoa/scripts/libs/kafka_dpe_addressing.ctl).
 Usage:
 
-	`kafkaAddress_addressDPE("Consumer.point1", "mytopic$kafka_key$STRING", 2, kafkaAddress_MODE_IN);`
-	`kafkaAddress_addressDPE("Producer.point1", "mytopic$kafka_ke$100$STRING", 2, kafkaAddress_MODE_OUT);`
+	`kafkaAddress_addressDPE("Consumer.myDPE", kafkaAddress_DATA_TYPE_STRING, kafkaAddress_MODE_IN, 2, "my_kafka_topic", "my_kafka_key");`
+	`kafkaAddress_addressDPE("Producer.myDPE", kafkaAddress_DATA_TYPE_STRING, kafkaAddress_MODE_OUT, 2, "my_kafka_topic", "my_kafka_key", 100);`
 
 
 See [7.3 Driver configuration](#toc7.3) section for a brief descprition of relevant CONFIG_KAFKA DPEs.
