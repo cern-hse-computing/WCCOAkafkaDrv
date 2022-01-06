@@ -18,6 +18,7 @@
 
 #include <HWMapper.hxx>
 #include <unordered_set>
+#include <functional>
 
 // TODO: Write here all the Transformation types, one for every transformation
 #define kafkaDrvBoolTransType (TransUserType)
