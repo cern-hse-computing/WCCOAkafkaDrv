@@ -6,7 +6,7 @@ project(
     LANGUAGES CXX
 )
 
-set(PROJECT_VERSION 1.0.0)
+set(PROJECT_VERSION 1.1.0)
 
 configure_file(config.h.in configured/config.h)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/configured)
@@ -70,7 +70,7 @@ target_link_libraries( ${TARGET} ${CMAKE_THREAD_LIBS_INIT} )
 include(ExternalProject)
 ExternalProject_Add(librdkafka-external
     GIT_REPOSITORY git@github.com:confluentinc/librdkafka.git
-    GIT_TAG 8695b9d63ac0fe1b891b511d5b36302ffc84d4e2
+    GIT_TAG v1.5.0
     GIT_SHALLOW ON
     GIT_PROGRESS ON
     SOURCE_DIR ${CMAKE_CURRENT_BINARY_DIR}/librdkafka
@@ -83,13 +83,14 @@ ExternalProject_Add(librdkafka-external
 
 ExternalProject_Add(cppkafka-external
     GIT_REPOSITORY git@github.com:mfontanini/cppkafka.git
-    GIT_TAG df4eaa07358248453c160a41c5af1409b48b1144
+    GIT_TAG v0.4.1
     GIT_PROGRESS ON
     GIT_SUBMODULES ""
     SOURCE_DIR ${CMAKE_CURRENT_BINARY_DIR}/cppkafka
     CMAKE_ARGS 
         -DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}
         -DCPPKAFKA_DISABLE_TESTS=ON
+        -DCMAKE_INSTALL_LIBDIR=lib
     BUILD_IN_SOURCE 1
     UPDATE_COMMAND ""
     DEPENDS librdkafka-external
