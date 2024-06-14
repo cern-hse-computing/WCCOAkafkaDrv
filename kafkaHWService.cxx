@@ -98,7 +98,7 @@ void kafkaHWService::handleProducerConfigError(int code, const std::string& str)
     {
         _brokersDown = true;
         _producerFacade->setProducerSuccessCallback(_producerSuccessCB);
-        insertInDataToDp(PRODUCER_ALL_BROKERS_DOWN_DP, "1");
+        insertInDataToDp(PRODUCER_ALL_BROKERS_DOWN_DP, "TRUE");
     }
 }
 
@@ -117,7 +117,7 @@ void kafkaHWService::handleProducerSuccess(const std::string& message)
     {
         _brokersDown = false;
         _producerFacade->setProducerSuccessCallback(nullptr);
-        insertInDataToDp(PRODUCER_ALL_BROKERS_DOWN_DP, "0");
+        insertInDataToDp(PRODUCER_ALL_BROKERS_DOWN_DP, "FALSE");
     }
 }
 
