@@ -69,7 +69,7 @@ target_link_libraries( ${TARGET} ${CMAKE_THREAD_LIBS_INIT} )
 # ExternalProject_Add librdkafka and cppkafka
 include(ExternalProject)
 ExternalProject_Add(librdkafka-external
-    GIT_REPOSITORY ssh://git@gitlab.cern.ch:7999/hse-see-co/WCCDrivers/mirrors/librdkafka.git
+    GIT_REPOSITORY git@github.com:confluentinc/librdkafka.git
     GIT_TAG 8695b9d63ac0fe1b891b511d5b36302ffc84d4e2
     GIT_SHALLOW ON
     GIT_PROGRESS ON
@@ -82,7 +82,7 @@ ExternalProject_Add(librdkafka-external
 )
 
 ExternalProject_Add(cppkafka-external
-    GIT_REPOSITORY ssh://git@gitlab.cern.ch:7999/hse-see-co/WCCDrivers/mirrors/cppkafka.git
+    GIT_REPOSITORY git@github.com:mfontanini/cppkafka.git
     GIT_TAG df4eaa07358248453c160a41c5af1409b48b1144
     GIT_PROGRESS ON
     GIT_SUBMODULES ""
