@@ -15,6 +15,7 @@
 // Our transformation class PVSS <--> Hardware
 #include "kafkaStringTrans.hxx"
 #include <ErrHdl.hxx>     // The Error handler Basics/Utilities
+#include <TextVar.hxx>
 
 
 #include "kafkaHWMapper.hxx"
