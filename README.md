@@ -72,8 +72,8 @@ The user has the following possibilities:
 
 * C++11 STL
 * WinCC OA API libraries
-* [cppkafka](./libs) under BSD2 (available as git submodule. Check CMakeLists for release version)
-* [librdkafka](./libs) under BSD2 (available as git submodule. Check CMakeLists for release version)
+* [cppkafka](https://github.com/mfontanini/cppkafka) under BSD2 (check CMakeLists for release version)
+* [librdkafka](https://github.com/confluentinc/librdkafka) under BSD2 (check CMakeLists for release version)
 
 
 <a name="toc2.1"></a>
@@ -98,7 +98,7 @@ Note that if you set the `PVSS_PROJ_PATH` environment variable beforehand, you c
 ## 3.1 To build the driver
 
     export PVSS_PROJ_PATH=<path_to_pvss_project_folder>
-	mkdir build
+    mkdir build
     cd build
     cmake ..
     make -j
