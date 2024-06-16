@@ -72,8 +72,8 @@ The user has the following possibilities:
 
 * C++11 STL
 * WinCC OA API libraries
-* [cppkafka](./libs) under BSD2 (available as git submodule. Our working version commit is @ `df4eaa07`)
-* [librdkafka](./libs) under BSD2 (available as git submodule. Our working version commit is @ `8695b9d6`)
+* [cppkafka](./libs) under BSD2 (available as git submodule. Check CMakeLists for release version)
+* [librdkafka](./libs) under BSD2 (available as git submodule. Check CMakeLists for release version)
 
 
 <a name="toc2.1"></a>
