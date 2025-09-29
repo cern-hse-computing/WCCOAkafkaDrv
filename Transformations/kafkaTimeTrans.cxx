@@ -49,7 +49,7 @@ VariableType kafkaTimeTrans::getVariableType() const {
 	return TIME_VAR;
 }
 
-PVSSboolean kafkaTimeTrans::toPeriph(PVSSchar *buffer, PVSSuint len,	const Variable &var, const PVSSuint subix) const {
+PVSSboolean kafkaTimeTrans::toPeriph(PVSSchar *buffer, PVSSushort len,	const Variable &var, const PVSSushort subix) const {
 
 	if(var.isA() != TIME_VAR){
 		ErrHdl::error(ErrClass::PRIO_SEVERE, // Data will be lost
@@ -64,7 +64,7 @@ PVSSboolean kafkaTimeTrans::toPeriph(PVSSchar *buffer, PVSSuint len,	const Varia
 	return PVSS_TRUE;
 }
 
-VariablePtr kafkaTimeTrans::toVar(const PVSSchar *buffer, const PVSSuint dlen, const PVSSuint subix) const {
+VariablePtr kafkaTimeTrans::toVar(const PVSSchar *buffer, const PVSSushort dlen, const PVSSushort subix) const {
 
     if(buffer == NULL || !dlen){
 		ErrHdl::error(ErrClass::PRIO_SEVERE, // Data will be lost

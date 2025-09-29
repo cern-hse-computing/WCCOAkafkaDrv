@@ -76,8 +76,8 @@ PVSSboolean kafkaResources::readSection()
                       keyWord);
 
         // signal Error, so we stop later
-        cfgError = PVSS_TRUE;
-      }
+        Resources::setCfgError();
+       }
 
       // get next entry
       getNextEntry();

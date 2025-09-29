@@ -47,7 +47,7 @@ VariableType kafkaBoolTrans::getVariableType() const {
 	return BIT_VAR;
 }
 
-PVSSboolean kafkaBoolTrans::toPeriph(PVSSchar *buffer, PVSSuint len,	const Variable &var, const PVSSuint subix) const {
+PVSSboolean kafkaBoolTrans::toPeriph(PVSSchar *buffer, PVSSushort len,	const Variable &var, const PVSSushort subix) const {
 
 	if(var.isA() != BIT_VAR){
 		ErrHdl::error(ErrClass::PRIO_SEVERE, // Data will be lost
@@ -64,7 +64,7 @@ PVSSboolean kafkaBoolTrans::toPeriph(PVSSchar *buffer, PVSSuint len,	const Varia
 	return PVSS_TRUE;
 }
 
-VariablePtr kafkaBoolTrans::toVar(const PVSSchar *buffer, const PVSSuint dlen, const PVSSuint subix) const {
+VariablePtr kafkaBoolTrans::toVar(const PVSSchar *buffer, const PVSSushort dlen, const PVSSushort subix) const {
 
     if(!dlen || buffer == NULL)
     {

@@ -47,7 +47,7 @@ VariableType kafkaInt32Trans::getVariableType() const {
 	return INTEGER_VAR;
 }
 
-PVSSboolean kafkaInt32Trans::toPeriph(PVSSchar *buffer, PVSSuint len, const Variable &var, const PVSSuint subix) const {
+PVSSboolean kafkaInt32Trans::toPeriph(PVSSchar *buffer, PVSSushort len, const Variable &var, const PVSSushort subix) const {
 
 	if(var.isA() != INTEGER_VAR /* || subix >= Transformation::getNumberOfElements() */){
 		ErrHdl::error(ErrClass::PRIO_SEVERE, // Data will be lost
@@ -63,7 +63,7 @@ PVSSboolean kafkaInt32Trans::toPeriph(PVSSchar *buffer, PVSSuint len, const Vari
 	return PVSS_TRUE;
 }
 
-VariablePtr kafkaInt32Trans::toVar(const PVSSchar *buffer, const PVSSuint dlen, const PVSSuint subix) const {
+VariablePtr kafkaInt32Trans::toVar(const PVSSchar *buffer, const PVSSushort dlen, const PVSSushort subix) const {
 
     if(buffer == NULL || !dlen){
 		ErrHdl::error(ErrClass::PRIO_SEVERE, // Data will be lost

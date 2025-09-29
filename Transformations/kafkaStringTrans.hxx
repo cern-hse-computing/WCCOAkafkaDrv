@@ -49,10 +49,10 @@ class kafkaStringTrans : public Transformation
     virtual Transformation *clone() const;
 
     // Conversion from PVSS to Hardware
-    virtual PVSSboolean toPeriph(PVSSchar *dataPtr, PVSSuint len, const Variable &var, const PVSSuint subix) const;
+    virtual PVSSboolean toPeriph(PVSSchar *dataPtr, PVSSushort len, const Variable &var, const PVSSushort subix) const;
 
     // Conversion from Hardware to PVSS
-    virtual VariablePtr toVar(const PVSSchar *data, const PVSSuint dlen, const PVSSuint subix) const;
+    virtual VariablePtr toVar(const PVSSchar *data, const PVSSushort dlen, const PVSSushort subix) const;
 private:
     const static size_t _size = 1024 * 10;
 

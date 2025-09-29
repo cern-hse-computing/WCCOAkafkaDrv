@@ -71,8 +71,8 @@ VariableType kafkaStringTrans::getVariableType() const
 //----------------------------------------------------------------------------
 // Convert data from PVSS to Hardware.
 
-PVSSboolean kafkaStringTrans::toPeriph(PVSSchar *buffer, PVSSuint len,
-                                      const Variable &var, const PVSSuint subix) const
+PVSSboolean kafkaStringTrans::toPeriph(PVSSchar *buffer, PVSSushort len,
+                                      const Variable &var, const PVSSushort subix) const
 {
 
   // Be paranoic, check variable type
@@ -127,8 +127,8 @@ PVSSboolean kafkaStringTrans::toPeriph(PVSSchar *buffer, PVSSuint len,
 //----------------------------------------------------------------------------
 // Conversion from Hardware to PVSS
 
-VariablePtr kafkaStringTrans::toVar(const PVSSchar *buffer, const PVSSuint dlen,
-                                   const PVSSuint /* subix */) const
+VariablePtr kafkaStringTrans::toVar(const PVSSchar *buffer, const PVSSushort dlen,
+                                   const PVSSushort /* subix */) const
 {
 
   return new TextVar((const char *)buffer, dlen);

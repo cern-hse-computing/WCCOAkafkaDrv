@@ -58,8 +58,8 @@ class kafkaBoolTrans: public Transformation {
 	 * \param subix subindex of value in data point
 	 * \return flag if translation was successful
 	 */
-	PVSSboolean toPeriph(PVSSchar *dataPtr, PVSSuint len, const Variable &var,
-			const PVSSuint subix) const;
+	PVSSboolean toPeriph(PVSSchar *dataPtr, PVSSushort len, const Variable &var,
+			const PVSSushort subix) const;
 
 	/*!
 	 * Conversion from Hardware to PVSS
@@ -68,8 +68,8 @@ class kafkaBoolTrans: public Transformation {
 	 * \param subix subindex of value associated with peripheral address
 	 * \return flag if translation was successful
 	 */
-	VariablePtr toVar(const PVSSchar *data, const PVSSuint dlen,
-			const PVSSuint subix) const;
+	VariablePtr toVar(const PVSSchar *data, const PVSSushort dlen,
+			const PVSSushort subix) const;
 
 private:
 	const static uint8_t size = sizeof(bool);
