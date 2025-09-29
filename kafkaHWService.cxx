@@ -353,8 +353,11 @@ void handleSegfault(int signal_code){
     backtrace_symbols_fd(array, size, STDERR_FILENO);
 
     // restore and trigger default handle (to get the core dump)
-    signal(signal_code, SIG_DFL);
-    kill(getpid(), signal_code);
-
-    exit(1);
+    struct sigaction sa;
+    sa.sa_handler = SIG_DFL;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = 0;
+    sigaction(signal_code, &sa, NULL);
+    
+    raise(signal_code);
 }
